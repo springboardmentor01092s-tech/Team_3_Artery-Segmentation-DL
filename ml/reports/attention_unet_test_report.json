@@ -1,0 +1,9 @@
+{
+  "model": "Attention U-Net",
+  "checkpoint_epoch": 12,
+  "best_validation_dice": 0.80521843791008,
+  "test_images": 300,
+  "test_dice": 0.7597093211886629,
+  "test_dice_percent": 75.97093211886629,
+  "mean_batch_bce_loss": 0.07152313098311425
+}

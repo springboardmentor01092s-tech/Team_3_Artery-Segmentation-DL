@@ -1,0 +1,74 @@
+
+# Frontend dependencies and build outputs
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+.coverage*
+backend/.coverage*
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+!.postgres.env.example
+backend/.env
+backend/.env.*
+!backend/.env.example
+!backend/.postgres.env.example
+backend/.postgres.env
+
+# Private keys and secret files
+*.pem
+*.key
+*.p12
+*.pfx
+*.secret
+.secrets/
+
+# Local data, uploads, and generated files
+/data/
+/uploads/
+/storage/
+backend/storage/
+backend/uploads/
+backend/generated/
+ml/generated_artery_masks/
+ml/postprocessed_artery_masks/
+ml/vessel_structure_analysis/
+
+# Large trained model checkpoints
+*.pt
+*.pth
+*.ckpt
+
+# Backend local files and logs
+backend/.venv/
+backend/venv/
+backend/**/__pycache__/
+backend/**/*.py[cod]
+backend/.pytest_cache/
+backend/.mypy_cache/
+backend/.ruff_cache/
+backend/*.log
+
+# Operating system and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+# Duplicate archive of design reference images
+/design-references.zip

@@ -1,0 +1,30 @@
+{
+  "project": "Artery Segmentation and Stenosis Detection",
+  "dataset": "ARCADE coronary angiography",
+  "training_configuration": {
+    "image_size": "256x256",
+    "training_images": 1000,
+    "validation_images": 200,
+    "test_images": 300,
+    "epochs": 30,
+    "batch_size": 2,
+    "optimizer": "Adam",
+    "learning_rate": 0.0001,
+    "loss": "0.5 BCEWithLogitsLoss + 0.5 DiceLoss"
+  },
+  "models": {
+    "Baseline U-Net": {
+      "checkpoint_epoch": 13,
+      "best_validation_dice": 0.797058179974556,
+      "previously_reported_test_dice": 0.7559,
+      "test_score_status": "Previously reported; not re-evaluated in this cell"
+    },
+    "Attention U-Net": {
+      "checkpoint_epoch": 12,
+      "best_validation_dice": 0.80521843791008,
+      "test_dice": 0.7597093211886629,
+      "test_score_status": "Loaded from saved test evaluation report"
+    }
+  },
+  "comparison_note": "Attention U-Net test Dice is 75.97%; the previously reported baseline test Dice is 75.59%. The 0.38 percentage-point difference is small. Re-evaluate the recovered baseline checkpoint before making a definitive model-selection claim."
+}

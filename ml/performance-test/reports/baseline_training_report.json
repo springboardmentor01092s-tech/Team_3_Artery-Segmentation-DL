@@ -1,0 +1,35 @@
+{
+  "model": "UNet(in_channels=1, out_channels=1)",
+  "dataset": "ARCADE syntax",
+  "training_split": "train",
+  "selection_split": "val",
+  "test_split_used": false,
+  "input_size": [
+    128,
+    128
+  ],
+  "loss": "0.5 * BCEWithLogitsLoss + 0.5 * DiceLoss",
+  "optimizer": "Adam(lr=0.0001)",
+  "seed": 42,
+  "device": "cpu",
+  "epochs_requested": 1,
+  "batch_size": 1,
+  "cpu_threads_requested": 2,
+  "cpu_threads_configured": 2,
+  "cpu_interop_threads_configured": 2,
+  "log_every_batches": 10,
+  "training_samples": 4,
+  "validation_samples": 2,
+  "history": [
+    {
+      "epoch": 1,
+      "training_loss": 0.8432195782661438,
+      "validation_loss": 0.7859326601028442,
+      "validation_dice": 0.0020146885653957725
+    }
+  ],
+  "best_epoch": 1,
+  "best_validation_dice": 0.0020146885653957725,
+  "checkpoint": "ml\\performance-test\\checkpoints\\best_unet.pt",
+  "clinical_validation_claim": false
+}
