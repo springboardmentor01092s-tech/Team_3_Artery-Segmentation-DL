@@ -1,0 +1,10 @@
+{
+  "title": "ARCADE Segmentation Project Code (Private)",
+  "id": "drajuakshayarao/arcade-project-code-private-nov2026",
+  "licenses": [
+    {
+      "name": "other"
+    }
+  ],
+  "description": "Private code and baseline checkpoint used by the ARCADE validation-only Kaggle GPU experiment. No database, uploads, secrets, or original source dataset."
+}

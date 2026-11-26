@@ -1,0 +1,20 @@
+{
+  "id": "drajuakshayarao/arcade-gpu-model-sweep-2026-11-24",
+  "id_no": 147080676,
+  "title": "ARCADE GPU Model Sweep 2026-11-24",
+  "code_file": "arcade-gpu-model-sweep-2026-11-24.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": [],
+  "dataset_sources": [
+    "drajuakshayarao/arcade-project-code-private-nov2026",
+    "drajuakshayarao/arcade-train-val-private-nov2026"
+  ],
+  "kernel_sources": [],
+  "competition_sources": [],
+  "model_sources": []
+}

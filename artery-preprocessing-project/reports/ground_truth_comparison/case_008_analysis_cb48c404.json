@@ -1,0 +1,93 @@
+{
+  "analysis_id": "cb48c404-6a86-4d76-a167-8cec215b57e2",
+  "case_identifier": "case_008",
+  "uploaded_original_filename": "1.png",
+  "dataset_image_path": "stenosis/train/images/1.png",
+  "annotation_file": "stenosis/train/annotations/train.json",
+  "dataset_image_sha256": "e285e6f9515aedeb4d126182475dc43cfee8f8594ecdfa8023c9df0a97aef8e1",
+  "uploaded_image_sha256": "e285e6f9515aedeb4d126182475dc43cfee8f8594ecdfa8023c9df0a97aef8e1",
+  "coco_image_id": 1,
+  "annotation_ids": [
+    98
+  ],
+  "category_ids": [
+    26
+  ],
+  "width": 512,
+  "height": 512,
+  "alignment_verified": true,
+  "prediction_source": "existing persisted mask; model not rerun",
+  "checkpoint_name": "best_stenosis_unet_optimized.pth",
+  "checkpoint_sha256": "981a98a7ab1ceee190d1d0c89c45cdeb37dd27b49741f3ffda1487d1f38d288d",
+  "checkpoint_matches_current": true,
+  "metrics_semantics": "pixel overlap with category-26 lesion polygons; not lumen or clinical stenosis metrics",
+  "metrics": {
+    "tp": 2378,
+    "fp": 2413,
+    "fn": 92,
+    "dice": 0.6550061974934582,
+    "iou": 0.48699569936514436,
+    "precision": 0.49634731788770614,
+    "recall": 0.962753036437247,
+    "ground_truth_pixels": 2470,
+    "predicted_pixels": 4791
+  },
+  "predicted_components": [
+    {
+      "candidate_id": 5,
+      "x": 328,
+      "y": 293,
+      "width": 74,
+      "height": 147,
+      "predicted_pixels": 3100,
+      "ground_truth_overlap_pixels": 2378,
+      "overlap_fraction_of_candidate": 0.7670967741935484,
+      "overlaps_ground_truth": true
+    },
+    {
+      "candidate_id": 3,
+      "x": 127,
+      "y": 135,
+      "width": 31,
+      "height": 34,
+      "predicted_pixels": 597,
+      "ground_truth_overlap_pixels": 0,
+      "overlap_fraction_of_candidate": 0.0,
+      "overlaps_ground_truth": false
+    },
+    {
+      "candidate_id": 4,
+      "x": 177,
+      "y": 190,
+      "width": 21,
+      "height": 34,
+      "predicted_pixels": 414,
+      "ground_truth_overlap_pixels": 0,
+      "overlap_fraction_of_candidate": 0.0,
+      "overlaps_ground_truth": false
+    },
+    {
+      "candidate_id": 1,
+      "x": 237,
+      "y": 35,
+      "width": 22,
+      "height": 14,
+      "predicted_pixels": 233,
+      "ground_truth_overlap_pixels": 0,
+      "overlap_fraction_of_candidate": 0.0,
+      "overlaps_ground_truth": false
+    },
+    {
+      "candidate_id": 2,
+      "x": 343,
+      "y": 124,
+      "width": 33,
+      "height": 25,
+      "predicted_pixels": 447,
+      "ground_truth_overlap_pixels": 0,
+      "overlap_fraction_of_candidate": 0.0,
+      "overlaps_ground_truth": false
+    }
+  ],
+  "visualization_file": "case_008_analysis_cb48c404.png"
+}

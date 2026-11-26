@@ -1,0 +1,6 @@
+{
+  "threshold": 0.35,
+  "selection_method": "validation_macro_dice",
+  "validation_report": "validation_metrics_resunet16_stenosis_experiment.json",
+  "validation_macro_dice": 0.34666056924229993
+}

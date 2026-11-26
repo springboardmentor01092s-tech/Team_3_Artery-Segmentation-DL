@@ -1,0 +1,1229 @@
+{
+  "dataset_root": "C:\\Users\\aksha\\Downloads\\arcade",
+  "split_audits": [
+    {
+      "task": "stenosis",
+      "split": "train",
+      "annotation_file": "C:\\Users\\aksha\\Downloads\\arcade\\stenosis\\train\\annotations\\train.json",
+      "coco_image_records": 1000,
+      "physical_image_files": 1000,
+      "annotation_records": 1625,
+      "categories": [
+        {
+          "id": 1,
+          "name": "1",
+          "supercategory": ""
+        },
+        {
+          "id": 2,
+          "name": "2",
+          "supercategory": ""
+        },
+        {
+          "id": 3,
+          "name": "3",
+          "supercategory": ""
+        },
+        {
+          "id": 4,
+          "name": "4",
+          "supercategory": ""
+        },
+        {
+          "id": 5,
+          "name": "5",
+          "supercategory": ""
+        },
+        {
+          "id": 6,
+          "name": "6",
+          "supercategory": ""
+        },
+        {
+          "id": 7,
+          "name": "7",
+          "supercategory": ""
+        },
+        {
+          "id": 8,
+          "name": "8",
+          "supercategory": ""
+        },
+        {
+          "id": 9,
+          "name": "9",
+          "supercategory": ""
+        },
+        {
+          "id": 10,
+          "name": "9a",
+          "supercategory": ""
+        },
+        {
+          "id": 11,
+          "name": "10",
+          "supercategory": ""
+        },
+        {
+          "id": 12,
+          "name": "10a",
+          "supercategory": ""
+        },
+        {
+          "id": 13,
+          "name": "11",
+          "supercategory": ""
+        },
+        {
+          "id": 14,
+          "name": "12",
+          "supercategory": ""
+        },
+        {
+          "id": 15,
+          "name": "12a",
+          "supercategory": ""
+        },
+        {
+          "id": 16,
+          "name": "13",
+          "supercategory": ""
+        },
+        {
+          "id": 17,
+          "name": "14",
+          "supercategory": ""
+        },
+        {
+          "id": 18,
+          "name": "14a",
+          "supercategory": ""
+        },
+        {
+          "id": 19,
+          "name": "15",
+          "supercategory": ""
+        },
+        {
+          "id": 20,
+          "name": "16",
+          "supercategory": ""
+        },
+        {
+          "id": 21,
+          "name": "16a",
+          "supercategory": ""
+        },
+        {
+          "id": 22,
+          "name": "16b",
+          "supercategory": ""
+        },
+        {
+          "id": 23,
+          "name": "16c",
+          "supercategory": ""
+        },
+        {
+          "id": 24,
+          "name": "12b",
+          "supercategory": ""
+        },
+        {
+          "id": 25,
+          "name": "14b",
+          "supercategory": ""
+        },
+        {
+          "id": 26,
+          "name": "stenosis",
+          "supercategory": ""
+        }
+      ],
+      "annotation_category_counts": {
+        "26": 1625
+      },
+      "segmentation_format_counts": {
+        "polygon_list": 1625
+      },
+      "duplicate_image_ids": 0,
+      "duplicate_annotation_ids": 560,
+      "annotations_with_unknown_image_id": 0,
+      "invalid_bboxes": 0,
+      "annotations_without_segmentation": 0,
+      "degenerate_polygons": 0,
+      "missing_images": [],
+      "orphan_images": [],
+      "unreadable_images": [],
+      "dimension_mismatches": [],
+      "dimensions": {
+        "512x512": 1000
+      },
+      "empty_target_images": [
+        "738.png",
+        "888.png",
+        "218.png"
+      ],
+      "positive_target_images": 997,
+      "foreground_pixels": {
+        "min": 0,
+        "median": 1669.5,
+        "max": 9424,
+        "total": 2077649
+      }
+    },
+    {
+      "task": "stenosis",
+      "split": "val",
+      "annotation_file": "C:\\Users\\aksha\\Downloads\\arcade\\stenosis\\val\\annotations\\val.json",
+      "coco_image_records": 200,
+      "physical_image_files": 200,
+      "annotation_records": 406,
+      "categories": [
+        {
+          "id": 1,
+          "name": "1",
+          "supercategory": ""
+        },
+        {
+          "id": 2,
+          "name": "2",
+          "supercategory": ""
+        },
+        {
+          "id": 3,
+          "name": "3",
+          "supercategory": ""
+        },
+        {
+          "id": 4,
+          "name": "4",
+          "supercategory": ""
+        },
+        {
+          "id": 5,
+          "name": "5",
+          "supercategory": ""
+        },
+        {
+          "id": 6,
+          "name": "6",
+          "supercategory": ""
+        },
+        {
+          "id": 7,
+          "name": "7",
+          "supercategory": ""
+        },
+        {
+          "id": 8,
+          "name": "8",
+          "supercategory": ""
+        },
+        {
+          "id": 9,
+          "name": "9",
+          "supercategory": ""
+        },
+        {
+          "id": 10,
+          "name": "9a",
+          "supercategory": ""
+        },
+        {
+          "id": 11,
+          "name": "10",
+          "supercategory": ""
+        },
+        {
+          "id": 12,
+          "name": "10a",
+          "supercategory": ""
+        },
+        {
+          "id": 13,
+          "name": "11",
+          "supercategory": ""
+        },
+        {
+          "id": 14,
+          "name": "12",
+          "supercategory": ""
+        },
+        {
+          "id": 15,
+          "name": "12a",
+          "supercategory": ""
+        },
+        {
+          "id": 16,
+          "name": "13",
+          "supercategory": ""
+        },
+        {
+          "id": 17,
+          "name": "14",
+          "supercategory": ""
+        },
+        {
+          "id": 18,
+          "name": "14a",
+          "supercategory": ""
+        },
+        {
+          "id": 19,
+          "name": "15",
+          "supercategory": ""
+        },
+        {
+          "id": 20,
+          "name": "16",
+          "supercategory": ""
+        },
+        {
+          "id": 21,
+          "name": "16a",
+          "supercategory": ""
+        },
+        {
+          "id": 22,
+          "name": "16b",
+          "supercategory": ""
+        },
+        {
+          "id": 23,
+          "name": "16c",
+          "supercategory": ""
+        },
+        {
+          "id": 24,
+          "name": "12b",
+          "supercategory": ""
+        },
+        {
+          "id": 25,
+          "name": "14b",
+          "supercategory": ""
+        },
+        {
+          "id": 26,
+          "name": "stenosis",
+          "supercategory": ""
+        }
+      ],
+      "annotation_category_counts": {
+        "26": 406
+      },
+      "segmentation_format_counts": {
+        "polygon_list": 406
+      },
+      "duplicate_image_ids": 0,
+      "duplicate_annotation_ids": 0,
+      "annotations_with_unknown_image_id": 0,
+      "invalid_bboxes": 0,
+      "annotations_without_segmentation": 0,
+      "degenerate_polygons": 0,
+      "missing_images": [],
+      "orphan_images": [],
+      "unreadable_images": [],
+      "dimension_mismatches": [],
+      "dimensions": {
+        "512x512": 200
+      },
+      "empty_target_images": [],
+      "positive_target_images": 200,
+      "foreground_pixels": {
+        "min": 233,
+        "median": 2029.5,
+        "max": 9885,
+        "total": 442509
+      }
+    },
+    {
+      "task": "stenosis",
+      "split": "test",
+      "annotation_file": "C:\\Users\\aksha\\Downloads\\arcade\\stenosis\\test\\annotations\\test.json",
+      "coco_image_records": 300,
+      "physical_image_files": 300,
+      "annotation_records": 386,
+      "categories": [
+        {
+          "id": 1,
+          "name": "1",
+          "supercategory": ""
+        },
+        {
+          "id": 2,
+          "name": "2",
+          "supercategory": ""
+        },
+        {
+          "id": 3,
+          "name": "3",
+          "supercategory": ""
+        },
+        {
+          "id": 4,
+          "name": "4",
+          "supercategory": ""
+        },
+        {
+          "id": 5,
+          "name": "5",
+          "supercategory": ""
+        },
+        {
+          "id": 6,
+          "name": "6",
+          "supercategory": ""
+        },
+        {
+          "id": 7,
+          "name": "7",
+          "supercategory": ""
+        },
+        {
+          "id": 8,
+          "name": "8",
+          "supercategory": ""
+        },
+        {
+          "id": 9,
+          "name": "9",
+          "supercategory": ""
+        },
+        {
+          "id": 10,
+          "name": "9a",
+          "supercategory": ""
+        },
+        {
+          "id": 11,
+          "name": "10",
+          "supercategory": ""
+        },
+        {
+          "id": 12,
+          "name": "10a",
+          "supercategory": ""
+        },
+        {
+          "id": 13,
+          "name": "11",
+          "supercategory": ""
+        },
+        {
+          "id": 14,
+          "name": "12",
+          "supercategory": ""
+        },
+        {
+          "id": 15,
+          "name": "12a",
+          "supercategory": ""
+        },
+        {
+          "id": 16,
+          "name": "13",
+          "supercategory": ""
+        },
+        {
+          "id": 17,
+          "name": "14",
+          "supercategory": ""
+        },
+        {
+          "id": 18,
+          "name": "14a",
+          "supercategory": ""
+        },
+        {
+          "id": 19,
+          "name": "15",
+          "supercategory": ""
+        },
+        {
+          "id": 20,
+          "name": "16",
+          "supercategory": ""
+        },
+        {
+          "id": 21,
+          "name": "16a",
+          "supercategory": ""
+        },
+        {
+          "id": 22,
+          "name": "16b",
+          "supercategory": ""
+        },
+        {
+          "id": 23,
+          "name": "16c",
+          "supercategory": ""
+        },
+        {
+          "id": 24,
+          "name": "12b",
+          "supercategory": ""
+        },
+        {
+          "id": 25,
+          "name": "14b",
+          "supercategory": ""
+        },
+        {
+          "id": 26,
+          "name": "stenosis",
+          "supercategory": ""
+        }
+      ],
+      "annotation_category_counts": {
+        "26": 386
+      },
+      "segmentation_format_counts": {
+        "polygon_list": 386
+      },
+      "duplicate_image_ids": 0,
+      "duplicate_annotation_ids": 0,
+      "annotations_with_unknown_image_id": 0,
+      "invalid_bboxes": 0,
+      "annotations_without_segmentation": 0,
+      "degenerate_polygons": 0,
+      "missing_images": [],
+      "orphan_images": [],
+      "unreadable_images": [],
+      "dimension_mismatches": [],
+      "dimensions": {
+        "512x512": 300
+      },
+      "empty_target_images": [],
+      "positive_target_images": 300,
+      "foreground_pixels": {
+        "min": 323,
+        "median": 2232.5,
+        "max": 8979,
+        "total": 754699
+      }
+    },
+    {
+      "task": "syntax",
+      "split": "train",
+      "annotation_file": "C:\\Users\\aksha\\Downloads\\arcade\\syntax\\train\\annotations\\train.json",
+      "coco_image_records": 1000,
+      "physical_image_files": 1000,
+      "annotation_records": 4976,
+      "categories": [
+        {
+          "id": 1,
+          "name": "1",
+          "supercategory": ""
+        },
+        {
+          "id": 2,
+          "name": "2",
+          "supercategory": ""
+        },
+        {
+          "id": 3,
+          "name": "3",
+          "supercategory": ""
+        },
+        {
+          "id": 4,
+          "name": "4",
+          "supercategory": ""
+        },
+        {
+          "id": 5,
+          "name": "5",
+          "supercategory": ""
+        },
+        {
+          "id": 6,
+          "name": "6",
+          "supercategory": ""
+        },
+        {
+          "id": 7,
+          "name": "7",
+          "supercategory": ""
+        },
+        {
+          "id": 8,
+          "name": "8",
+          "supercategory": ""
+        },
+        {
+          "id": 9,
+          "name": "9",
+          "supercategory": ""
+        },
+        {
+          "id": 10,
+          "name": "9a",
+          "supercategory": ""
+        },
+        {
+          "id": 11,
+          "name": "10",
+          "supercategory": ""
+        },
+        {
+          "id": 12,
+          "name": "10a",
+          "supercategory": ""
+        },
+        {
+          "id": 13,
+          "name": "11",
+          "supercategory": ""
+        },
+        {
+          "id": 14,
+          "name": "12",
+          "supercategory": ""
+        },
+        {
+          "id": 15,
+          "name": "12a",
+          "supercategory": ""
+        },
+        {
+          "id": 16,
+          "name": "13",
+          "supercategory": ""
+        },
+        {
+          "id": 17,
+          "name": "14",
+          "supercategory": ""
+        },
+        {
+          "id": 18,
+          "name": "14a",
+          "supercategory": ""
+        },
+        {
+          "id": 19,
+          "name": "15",
+          "supercategory": ""
+        },
+        {
+          "id": 20,
+          "name": "16",
+          "supercategory": ""
+        },
+        {
+          "id": 21,
+          "name": "16a",
+          "supercategory": ""
+        },
+        {
+          "id": 22,
+          "name": "16b",
+          "supercategory": ""
+        },
+        {
+          "id": 23,
+          "name": "16c",
+          "supercategory": ""
+        },
+        {
+          "id": 24,
+          "name": "12b",
+          "supercategory": ""
+        },
+        {
+          "id": 25,
+          "name": "14b",
+          "supercategory": ""
+        },
+        {
+          "id": 26,
+          "name": "stenosis",
+          "supercategory": ""
+        }
+      ],
+      "annotation_category_counts": {
+        "8": 310,
+        "6": 537,
+        "5": 525,
+        "7": 340,
+        "16": 305,
+        "13": 320,
+        "17": 107,
+        "25": 127,
+        "11": 21,
+        "9": 198,
+        "10": 70,
+        "15": 129,
+        "4": 303,
+        "1": 374,
+        "2": 375,
+        "3": 369,
+        "20": 232,
+        "14": 61,
+        "19": 38,
+        "24": 63,
+        "18": 49,
+        "21": 43,
+        "22": 48,
+        "23": 31,
+        "12": 1
+      },
+      "segmentation_format_counts": {
+        "polygon_list": 4976
+      },
+      "duplicate_image_ids": 0,
+      "duplicate_annotation_ids": 1348,
+      "annotations_with_unknown_image_id": 0,
+      "invalid_bboxes": 0,
+      "annotations_without_segmentation": 0,
+      "degenerate_polygons": 0,
+      "missing_images": [],
+      "orphan_images": [],
+      "unreadable_images": [],
+      "dimension_mismatches": [],
+      "dimensions": {
+        "512x512": 1000
+      },
+      "empty_target_images": [],
+      "positive_target_images": 1000,
+      "foreground_pixels": {
+        "min": 1187,
+        "median": 8294.5,
+        "max": 22914,
+        "total": 8567639
+      }
+    },
+    {
+      "task": "syntax",
+      "split": "val",
+      "annotation_file": "C:\\Users\\aksha\\Downloads\\arcade\\syntax\\val\\annotations\\val.json",
+      "coco_image_records": 200,
+      "physical_image_files": 200,
+      "annotation_records": 1168,
+      "categories": [
+        {
+          "id": 1,
+          "name": "1",
+          "supercategory": ""
+        },
+        {
+          "id": 2,
+          "name": "2",
+          "supercategory": ""
+        },
+        {
+          "id": 3,
+          "name": "3",
+          "supercategory": ""
+        },
+        {
+          "id": 4,
+          "name": "4",
+          "supercategory": ""
+        },
+        {
+          "id": 5,
+          "name": "5",
+          "supercategory": ""
+        },
+        {
+          "id": 6,
+          "name": "6",
+          "supercategory": ""
+        },
+        {
+          "id": 7,
+          "name": "7",
+          "supercategory": ""
+        },
+        {
+          "id": 8,
+          "name": "8",
+          "supercategory": ""
+        },
+        {
+          "id": 9,
+          "name": "9",
+          "supercategory": ""
+        },
+        {
+          "id": 10,
+          "name": "9a",
+          "supercategory": ""
+        },
+        {
+          "id": 11,
+          "name": "10",
+          "supercategory": ""
+        },
+        {
+          "id": 12,
+          "name": "10a",
+          "supercategory": ""
+        },
+        {
+          "id": 13,
+          "name": "11",
+          "supercategory": ""
+        },
+        {
+          "id": 14,
+          "name": "12",
+          "supercategory": ""
+        },
+        {
+          "id": 15,
+          "name": "12a",
+          "supercategory": ""
+        },
+        {
+          "id": 16,
+          "name": "13",
+          "supercategory": ""
+        },
+        {
+          "id": 17,
+          "name": "14",
+          "supercategory": ""
+        },
+        {
+          "id": 18,
+          "name": "14a",
+          "supercategory": ""
+        },
+        {
+          "id": 19,
+          "name": "15",
+          "supercategory": ""
+        },
+        {
+          "id": 20,
+          "name": "16",
+          "supercategory": ""
+        },
+        {
+          "id": 21,
+          "name": "16a",
+          "supercategory": ""
+        },
+        {
+          "id": 22,
+          "name": "16b",
+          "supercategory": ""
+        },
+        {
+          "id": 23,
+          "name": "16c",
+          "supercategory": ""
+        },
+        {
+          "id": 24,
+          "name": "12b",
+          "supercategory": ""
+        },
+        {
+          "id": 25,
+          "name": "14b",
+          "supercategory": ""
+        },
+        {
+          "id": 26,
+          "name": "stenosis",
+          "supercategory": ""
+        }
+      ],
+      "annotation_category_counts": {
+        "5": 130,
+        "13": 70,
+        "6": 125,
+        "16": 70,
+        "25": 58,
+        "17": 20,
+        "7": 77,
+        "8": 74,
+        "20": 55,
+        "3": 66,
+        "2": 66,
+        "1": 66,
+        "4": 56,
+        "9": 50,
+        "10": 25,
+        "14": 17,
+        "15": 27,
+        "18": 24,
+        "24": 18,
+        "11": 21,
+        "22": 15,
+        "21": 13,
+        "23": 16,
+        "19": 3,
+        "12": 6
+      },
+      "segmentation_format_counts": {
+        "polygon_list": 1168
+      },
+      "duplicate_image_ids": 0,
+      "duplicate_annotation_ids": 0,
+      "annotations_with_unknown_image_id": 0,
+      "invalid_bboxes": 0,
+      "annotations_without_segmentation": 0,
+      "degenerate_polygons": 0,
+      "missing_images": [],
+      "orphan_images": [],
+      "unreadable_images": [],
+      "dimension_mismatches": [],
+      "dimensions": {
+        "512x512": 200
+      },
+      "empty_target_images": [],
+      "positive_target_images": 200,
+      "foreground_pixels": {
+        "min": 3238,
+        "median": 8677.5,
+        "max": 22137,
+        "total": 1878858
+      }
+    },
+    {
+      "task": "syntax",
+      "split": "test",
+      "annotation_file": "C:\\Users\\aksha\\Downloads\\arcade\\syntax\\test\\annotations\\test.json",
+      "coco_image_records": 300,
+      "physical_image_files": 300,
+      "annotation_records": 1672,
+      "categories": [
+        {
+          "id": 1,
+          "name": "1",
+          "supercategory": ""
+        },
+        {
+          "id": 2,
+          "name": "2",
+          "supercategory": ""
+        },
+        {
+          "id": 3,
+          "name": "3",
+          "supercategory": ""
+        },
+        {
+          "id": 4,
+          "name": "4",
+          "supercategory": ""
+        },
+        {
+          "id": 5,
+          "name": "5",
+          "supercategory": ""
+        },
+        {
+          "id": 6,
+          "name": "6",
+          "supercategory": ""
+        },
+        {
+          "id": 7,
+          "name": "7",
+          "supercategory": ""
+        },
+        {
+          "id": 8,
+          "name": "8",
+          "supercategory": ""
+        },
+        {
+          "id": 9,
+          "name": "9",
+          "supercategory": ""
+        },
+        {
+          "id": 10,
+          "name": "9a",
+          "supercategory": ""
+        },
+        {
+          "id": 11,
+          "name": "10",
+          "supercategory": ""
+        },
+        {
+          "id": 12,
+          "name": "10a",
+          "supercategory": ""
+        },
+        {
+          "id": 13,
+          "name": "11",
+          "supercategory": ""
+        },
+        {
+          "id": 14,
+          "name": "12",
+          "supercategory": ""
+        },
+        {
+          "id": 15,
+          "name": "12a",
+          "supercategory": ""
+        },
+        {
+          "id": 16,
+          "name": "13",
+          "supercategory": ""
+        },
+        {
+          "id": 17,
+          "name": "14",
+          "supercategory": ""
+        },
+        {
+          "id": 18,
+          "name": "14a",
+          "supercategory": ""
+        },
+        {
+          "id": 19,
+          "name": "15",
+          "supercategory": ""
+        },
+        {
+          "id": 20,
+          "name": "16",
+          "supercategory": ""
+        },
+        {
+          "id": 21,
+          "name": "16a",
+          "supercategory": ""
+        },
+        {
+          "id": 22,
+          "name": "16b",
+          "supercategory": ""
+        },
+        {
+          "id": 23,
+          "name": "16c",
+          "supercategory": ""
+        },
+        {
+          "id": 24,
+          "name": "12b",
+          "supercategory": ""
+        },
+        {
+          "id": 25,
+          "name": "14b",
+          "supercategory": ""
+        },
+        {
+          "id": 26,
+          "name": "stenosis",
+          "supercategory": ""
+        }
+      ],
+      "annotation_category_counts": {
+        "18": 27,
+        "5": 195,
+        "17": 67,
+        "25": 37,
+        "13": 119,
+        "16": 110,
+        "7": 83,
+        "9": 66,
+        "10": 35,
+        "8": 80,
+        "6": 188,
+        "24": 49,
+        "15": 23,
+        "1": 100,
+        "3": 100,
+        "20": 88,
+        "2": 100,
+        "11": 14,
+        "4": 92,
+        "19": 11,
+        "14": 15,
+        "23": 25,
+        "22": 24,
+        "21": 24
+      },
+      "segmentation_format_counts": {
+        "polygon_list": 1672
+      },
+      "duplicate_image_ids": 0,
+      "duplicate_annotation_ids": 0,
+      "annotations_with_unknown_image_id": 0,
+      "invalid_bboxes": 0,
+      "annotations_without_segmentation": 0,
+      "degenerate_polygons": 0,
+      "missing_images": [],
+      "orphan_images": [],
+      "unreadable_images": [],
+      "dimension_mismatches": [],
+      "dimensions": {
+        "512x512": 300
+      },
+      "empty_target_images": [],
+      "positive_target_images": 300,
+      "foreground_pixels": {
+        "min": 1894,
+        "median": 8734.5,
+        "max": 22006,
+        "total": 2817060
+      }
+    }
+  ],
+  "exact_duplicate_groups": [
+    {
+      "task": "stenosis",
+      "matches": [
+        {
+          "split": "train",
+          "file": "864.png"
+        },
+        {
+          "split": "train",
+          "file": "545.png"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "task": "stenosis",
+      "matches": [
+        {
+          "split": "train",
+          "file": "799.png"
+        },
+        {
+          "split": "train",
+          "file": "148.png"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "task": "stenosis",
+      "matches": [
+        {
+          "split": "train",
+          "file": "218.png"
+        },
+        {
+          "split": "val",
+          "file": "58.png"
+        }
+      ],
+      "cross_split": true
+    },
+    {
+      "task": "stenosis",
+      "matches": [
+        {
+          "split": "train",
+          "file": "916.png"
+        },
+        {
+          "split": "train",
+          "file": "86.png"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "task": "syntax",
+      "matches": [
+        {
+          "split": "train",
+          "file": "793.png"
+        },
+        {
+          "split": "train",
+          "file": "168.png"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "task": "syntax",
+      "matches": [
+        {
+          "split": "train",
+          "file": "612.png"
+        },
+        {
+          "split": "train",
+          "file": "501.png"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "task": "syntax",
+      "matches": [
+        {
+          "split": "train",
+          "file": "214.png"
+        },
+        {
+          "split": "train",
+          "file": "20.png"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "task": "syntax",
+      "matches": [
+        {
+          "split": "train",
+          "file": "887.png"
+        },
+        {
+          "split": "train",
+          "file": "478.png"
+        }
+      ],
+      "cross_split": false
+    },
+    {
+      "task": "syntax",
+      "matches": [
+        {
+          "split": "train",
+          "file": "337.png"
+        },
+        {
+          "split": "train",
+          "file": "972.png"
+        }
+      ],
+      "cross_split": false
+    }
+  ],
+  "cross_split_exact_duplicates": [
+    {
+      "task": "stenosis",
+      "matches": [
+        {
+          "split": "train",
+          "file": "218.png"
+        },
+        {
+          "split": "val",
+          "file": "58.png"
+        }
+      ],
+      "cross_split": true
+    }
+  ],
+  "stenosis_category_id": 26,
+  "stenosis_categories_contain_lumen_or_diameter_labels": false,
+  "measurement_conclusion": "COCO stenosis polygons and boxes do not provide calibrated lumen boundaries or reference/minimum lumen diameter measurements."
+}

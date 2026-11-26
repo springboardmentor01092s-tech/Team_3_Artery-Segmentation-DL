@@ -1,0 +1,66 @@
+# Secrets and local env
+.env
+.env.local
+*.pem
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+*.log
+
+# Node
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Databases and local storage (never commit private files)
+*.db
+*.sqlite
+*.sqlite3
+backend/uploads/
+backend/processed/
+backend/analysis/
+backend/storage/
+
+# Jupyter
+.ipynb_checkpoints/
+notebooks/.ipynb_checkpoints/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Test artifacts
+backend/.tmp_test_storage/
+backend/.coverage
+
+
+# Large datasets - keep locally, do not upload to GitHub
+kaggle_upload/arcade_training_data/
+
+# Generated validation comparison images
+reports/model_validation/validation_comparisons*/
+reports/model_validation/*/validation_comparisons*/
+
+# Local dataset inspection script
+a.py
+
+# Backup model files
+*.bak
+
+# Duplicate packaged archives
+kaggle_project_code.zip
+kaggle_upload/code_bundle/*.zip
+
+# Generated mask outputs
+mask_outputs/

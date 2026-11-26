@@ -1,0 +1,211 @@
+{
+  "audit_type": "independent_read_only_recalculation_from_originals_and_persisted_prediction",
+  "audit_date": "2026-11-25",
+  "sources": {
+    "dataset_image": "stenosis/train/images/1.png",
+    "annotation_file": "stenosis/train/annotations/train.json",
+    "coco_image_id": 1,
+    "coco_file_name": "1.png",
+    "dimensions_width_height": [
+      512,
+      512
+    ],
+    "category_id": 26,
+    "category_name": "stenosis",
+    "all_image_annotation_ids": [
+      98
+    ],
+    "all_image_category_ids": [
+      26
+    ],
+    "matching_stenosis_annotation_ids": [
+      98
+    ],
+    "matching_stenosis_annotation_bboxes_xywh": [
+      [
+        328.5,
+        297.0,
+        78.75,
+        140.75
+      ]
+    ],
+    "polygon_count_combined": 1,
+    "rasterization": "independent PIL polygon union at original 512x512 coordinates; no resize/transform",
+    "dataset_image_sha256": "e285e6f9515aedeb4d126182475dc43cfee8f8594ecdfa8023c9df0a97aef8e1",
+    "uploaded_original_sha256": "e285e6f9515aedeb4d126182475dc43cfee8f8594ecdfa8023c9df0a97aef8e1",
+    "stored_original_filename": "1.png",
+    "stored_image_record_id": "90903618-b060-4fab-ac20-cf4ab7fbe2ee",
+    "stored_analysis_id": "cb48c404-6a86-4d76-a167-8cec215b57e2",
+    "analysis_image_id": "90903618-b060-4fab-ac20-cf4ab7fbe2ee",
+    "stored_mask_artifact": "cb48c404-6a86-4d76-a167-8cec215b57e2_mask.png",
+    "stored_mask_sha256": "af5fe3c32d8ab0f8d7a97109fca58074726482d05a068fa33b1dbd461f3f680f",
+    "stored_mask_dimensions_width_height": [
+      512,
+      512
+    ]
+  },
+  "model_provenance": {
+    "checkpoint": "best_stenosis_unet_optimized.pth",
+    "checkpoint_sha256_current": "981a98a7ab1ceee190d1d0c89c45cdeb37dd27b49741f3ffda1487d1f38d288d",
+    "checkpoint_sha256_recorded": "981a98a7ab1ceee190d1d0c89c45cdeb37dd27b49741f3ffda1487d1f38d288d",
+    "checkpoint_matches_record": true,
+    "architecture_detected_from_checkpoint": "legacy_unet",
+    "checkpoint_metadata": {
+      "model_name": null,
+      "architecture": "UNet",
+      "task": null,
+      "image_size": 256,
+      "base_channels": null,
+      "in_channels": null,
+      "out_channels": null,
+      "epoch": 47,
+      "threshold": null,
+      "normalization": null
+    },
+    "stored_model_architecture": "legacy_unet",
+    "input_preprocessing": "RGB; PIL bilinear resize to 256x256; float32 /255; normalization none; probability resized back to original with OpenCV bilinear; thresholded at stored 0.55; connected components under 20 pixels filtered.",
+    "threshold": 0.55,
+    "threshold_source": "validation_macro_dice",
+    "threshold_sidecar": {
+      "threshold": 0.55,
+      "selection_method": "validation_macro_dice",
+      "validation_report": "validation_metrics_best_stenosis_unet_optimized.json",
+      "validation_macro_dice": 0.43168783122838844
+    },
+    "minimum_component_area_pixels": 20,
+    "prediction_regenerated_or_model_rerun": false,
+    "provenance_caveat": "Database link binds this stored mask to the exact uploaded original and records the checkpoint hash; the stored binary mask alone is not a cryptographic proof of the original inference computation.",
+    "analysis_table_architecture_column": null,
+    "architecture_provenance_note": "The redundant stenosis_analyses.model_architecture column is NULL. The embedded result metadata resolves to legacy_unet, and the checkpoint metadata says UNet; checkpoint state-dict detection resolves it to legacy_unet. No architecture disagreement was found, but the DB column was not populated."
+  },
+  "alignment": {
+    "dataset_and_uploaded_file_hash_equal": true,
+    "dataset_upload_dimensions_equal": true,
+    "coco_dimensions_equal": true,
+    "prediction_dimensions_equal": true,
+    "stored_foreground_pixel_count_matches_mask": true,
+    "stored_candidate_count_matches_mask": true
+  },
+  "metrics": {
+    "tp": 2378,
+    "fp": 2413,
+    "fn": 92,
+    "tn": 257261,
+    "dice": 0.6550061974934582,
+    "iou": 0.48699569936514436,
+    "precision": 0.49634731788770614,
+    "recall": 0.962753036437247,
+    "specificity": 0.9907075795035314,
+    "ground_truth_pixels": 2470,
+    "predicted_pixels": 4791,
+    "total_pixels": 262144
+  },
+  "candidate_components": [
+    {
+      "candidate_id": 1,
+      "bbox_xywh": [
+        237,
+        35,
+        22,
+        14
+      ],
+      "predicted_pixels": 233,
+      "ground_truth_overlap_pixels": 0,
+      "candidate_pixel_precision": 0.0,
+      "overlaps_ground_truth": false,
+      "centroid_xy": [
+        247.69,
+        41.45
+      ],
+      "mean_predicted_probability": 0.8414968252182007
+    },
+    {
+      "candidate_id": 2,
+      "bbox_xywh": [
+        343,
+        124,
+        33,
+        25
+      ],
+      "predicted_pixels": 447,
+      "ground_truth_overlap_pixels": 0,
+      "candidate_pixel_precision": 0.0,
+      "overlaps_ground_truth": false,
+      "centroid_xy": [
+        359.57,
+        135.29
+      ],
+      "mean_predicted_probability": 0.7842891812324524
+    },
+    {
+      "candidate_id": 3,
+      "bbox_xywh": [
+        127,
+        135,
+        31,
+        34
+      ],
+      "predicted_pixels": 597,
+      "ground_truth_overlap_pixels": 0,
+      "candidate_pixel_precision": 0.0,
+      "overlaps_ground_truth": false,
+      "centroid_xy": [
+        142.05,
+        151.25
+      ],
+      "mean_predicted_probability": 0.8783764839172363
+    },
+    {
+      "candidate_id": 4,
+      "bbox_xywh": [
+        177,
+        190,
+        21,
+        34
+      ],
+      "predicted_pixels": 414,
+      "ground_truth_overlap_pixels": 0,
+      "candidate_pixel_precision": 0.0,
+      "overlaps_ground_truth": false,
+      "centroid_xy": [
+        186.86,
+        206.06
+      ],
+      "mean_predicted_probability": 0.8776476383209229
+    },
+    {
+      "candidate_id": 5,
+      "bbox_xywh": [
+        328,
+        293,
+        74,
+        147
+      ],
+      "predicted_pixels": 3100,
+      "ground_truth_overlap_pixels": 2378,
+      "candidate_pixel_precision": 0.7670967741935484,
+      "overlaps_ground_truth": true,
+      "centroid_xy": [
+        365.98,
+        366.2
+      ],
+      "mean_predicted_probability": 0.9291159510612488
+    }
+  ],
+  "reported_prior_metrics": {
+    "tp": 2378,
+    "fp": 2413,
+    "fn": 92,
+    "dice": 0.655006,
+    "iou": 0.486996,
+    "precision": 0.496347,
+    "recall": 0.962753
+  },
+  "visualization": "arcade_image_1_independent_comparison.png",
+  "limitations": [
+    "One image from the training split only; not independent validation.",
+    "Pixel overlap against lesion polygons is not clinical stenosis detection performance.",
+    "Specificity counts every non-lesion pixel as TN and is dominated by background pixels.",
+    "No diameter or percent narrowing calculation performed."
+  ]
+}

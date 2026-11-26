@@ -1,0 +1,3 @@
+# Optional architectures used by the Kaggle GPU experiment workflow.
+# Install this only when training or serving an SMP-based checkpoint.
+segmentation-models-pytorch==0.6.0
