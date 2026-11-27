@@ -1,2 +1,4 @@
 ml/checkpoints/best_attention_unet.pt filter=lfs diff=lfs merge=lfs -text
 ml/performance-test/checkpoints/best_unet.pt filter=lfs diff=lfs merge=lfs -text
+ml/checkpoints/stenosis/standard_unetpp/*.pt filter=lfs diff=lfs merge=lfs -text
+ml/checkpoints/stenosis/focal_tversky/*.pt filter=lfs diff=lfs merge=lfs -text
