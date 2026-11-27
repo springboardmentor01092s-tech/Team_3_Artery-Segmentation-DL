@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
-import { Activity, Check, Circle, Clock3, FileImage, Info, Play, SlidersHorizontal, UploadCloud } from 'lucide-react'
-import PageHeader from '../components/PageHeader'
+import { FileImage, Play, UploadCloud } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 import Panel from '../components/Panel'
-import WorkspaceNotice from '../components/WorkspaceNotice'
 import { apiRequest, apiRequestBlob } from '../auth/api'
 import { useCases } from '../features/cases/useCases'
+import { buildAnalysisRunRequest } from '../features/analysis/contracts.mjs'
+import type { AnalysisRunResponse } from '../features/analysis/contracts.mjs'
 
 type ImageRecord = {
   id: string
@@ -38,6 +39,7 @@ type PreprocessingStatus = {
 
 const ACCEPTED_EXTENSIONS = new Set(['png', 'jpg', 'jpeg'])
 const SELECTED_CASE_SESSION_KEY = 'artery-image-upload-selected-case'
+const LATEST_ANALYSIS_RUN_SESSION_KEY = 'artery-latest-analysis-run'
 
 function formatBytes(bytes: number) {
   if (bytes < 1024) return `${bytes} B`
@@ -53,8 +55,6 @@ function describeUploadError(error: unknown) {
   }
   return error instanceof Error ? error.message : 'Unable to upload this image. Please try again.'
 }
-
-const stages = ['Image upload', 'Preprocessing', 'Artery segmentation', 'Stenosis detection', 'Results generation']
 
 export default function UploadAnalysisPage() {
   const { cases, patients, isLoading: isLoadingCases, hasLoadedData, error: caseError, reload: reloadCases } = useCases()
@@ -74,10 +74,15 @@ export default function UploadAnalysisPage() {
   const [previewErrors, setPreviewErrors] = useState<Record<string, boolean>>({})
   const [preprocessing, setPreprocessing] = useState<Record<string, PreprocessingStatus & { loading?: boolean }>>({})
   const [preprocessingLoadError, setPreprocessingLoadError] = useState('')
+  const [selectedImageId, setSelectedImageId] = useState('')
+  const [isAnalyzing, setIsAnalyzing] = useState(false)
+  const [analysisState, setAnalysisState] = useState<'idle' | 'failed' | 'unavailable'>('idle')
+  const [analysisMessage, setAnalysisMessage] = useState('')
   const fileInputRef = useRef<HTMLInputElement>(null)
   const selectionRestored = useRef(false)
+  const navigate = useNavigate()
   const selectedCase = cases.find((item) => item.id === caseId) ?? null
-  const selectedPatient = patients.find((item) => item.id === (selectedCase?.patient_id ?? patientId)) ?? null
+  const selectedImage = images.find((image) => image.id === selectedImageId && image.case_id === caseId) ?? null
   const availableCases = patientId ? cases.filter((item) => item.patient_id === patientId) : cases
 
   useEffect(() => {
@@ -222,48 +227,78 @@ export default function UploadAnalysisPage() {
     }
   }
 
+  async function startAnalysis() {
+    if (!selectedCase || !selectedImage || isAnalyzing || isUploading) return
+    setIsAnalyzing(true)
+    setAnalysisState('idle')
+    setAnalysisMessage('The backend is processing the selected image. This synchronous request may take several minutes.')
+    try {
+      const request = buildAnalysisRunRequest(selectedCase.id, selectedImage.id)
+      const run = await apiRequest<AnalysisRunResponse>(request.path, request.init)
+      if (run.status === 'completed') {
+        try {
+          window.sessionStorage.setItem(LATEST_ANALYSIS_RUN_SESSION_KEY, run.id)
+        } catch {
+          // The URL remains the primary handoff when session storage is unavailable.
+        }
+        navigate(`/results?${new URLSearchParams({ run_id: run.id }).toString()}`)
+        return
+      }
+      if (run.status === 'failed') {
+        setAnalysisState('failed')
+        setAnalysisMessage(run.failure_message || 'The backend could not complete this analysis. You can retry.')
+        return
+      }
+      setAnalysisState('unavailable')
+      setAnalysisMessage(`The backend returned status “${run.status}”; completed results are not available.`)
+    } catch (error) {
+      setAnalysisState('failed')
+      setAnalysisMessage(error instanceof Error ? error.message : 'The analysis request failed. You can retry.')
+    } finally {
+      setIsAnalyzing(false)
+    }
+  }
+
   return (
     <div className="feature-page upload-page">
-      <WorkspaceNotice />
-      <PageHeader title="Image Upload and Analysis" description="Stage angiography images and review the analysis workflow for a case." />
-      <div className="upload-case-row">
-        <Panel title="1. Select case" className="upload-case-panel">
-          <div className="select-grid">
-            <label>Patient reference<select value={patientId} disabled={isLoadingCases || !hasLoadedData || isUploading} onChange={(event) => { setPatientId(event.target.value); setCaseId(''); window.sessionStorage.removeItem(SELECTED_CASE_SESSION_KEY); setFiles([]); setFileError(''); setUploadNotice('') }}>
-              <option value="">{patients.length ? 'All patients' : isLoadingCases ? 'Loading patients…' : 'No patients available'}</option>
-              {patients.map((patient) => <option key={patient.id} value={patient.id}>{patient.patient_ref}</option>)}
-            </select></label>
-            <label>Case ID<select value={caseId} disabled={isLoadingCases || availableCases.length === 0 || isUploading} onChange={(event) => { const nextCaseId = event.target.value; setCaseId(nextCaseId); if (nextCaseId) window.sessionStorage.setItem(SELECTED_CASE_SESSION_KEY, nextCaseId); else window.sessionStorage.removeItem(SELECTED_CASE_SESSION_KEY); setFiles([]); setFileError(''); setUploadNotice('') }}>
-              <option value="">{isLoadingCases ? 'Loading cases…' : availableCases.length ? 'Select a case' : 'No cases available'}</option>
-              {availableCases.map((item) => <option key={item.id} value={item.id}>{item.case_ref}</option>)}
-            </select></label>
-          </div>
-          {caseError && <div className="upload-inline-error" role="alert">{caseError}<button className="button button--secondary button--small" type="button" onClick={() => void reloadCases()}>Retry</button></div>}
-        </Panel>
-        <Panel title="Case details" className="case-summary-panel">
-          {selectedCase ? <>
-            <div className="case-summary-empty"><FileImage size={19} /><span>{selectedCase.case_ref}{selectedPatient ? ` · ${selectedPatient.patient_ref}` : ''}</span></div>
-            <div className="case-summary-meta"><span>Modality <strong>{selectedCase.modality || 'Not specified'}</strong></span><span>Images <strong>{images.length}</strong></span><span>Analysis <strong className="state-pill state-pill--muted">Unavailable</strong></span></div>
-          </> : <div className="case-summary-empty"><FileImage size={19} /><span>Select an existing case to view its details.</span></div>}
-        </Panel>
-      </div>
-      <div className="upload-grid">
-        <Panel title="2. Upload images" className="upload-drop-panel">
-          <div className="upload-dropzone">
-            <span className="upload-dropzone__icon"><UploadCloud size={27} /></span>
-            <strong>{selectedCase ? 'Add images to the selected case' : 'Select a case before adding images'}</strong>
-            <span>PNG, JPG, and JPEG · Server-enforced size limit (10 MiB default)</span>
-            <input ref={fileInputRef} className="upload-file-input" type="file" accept=".png,.jpg,.jpeg,image/png,image/jpeg" multiple disabled={!selectedCase || isUploading} onChange={(event) => chooseFiles(event.target.files)} aria-label="Choose image files" />
-            <button className="button button--primary button--small" type="button" disabled={!selectedCase || isUploading} onClick={() => fileInputRef.current?.click()}><UploadCloud size={15} /> Choose files</button>
-            {files.length > 0 && <div className="upload-selected-files"><strong>{files.length} file{files.length === 1 ? '' : 's'} selected</strong><ul>{files.map((file, index) => <li key={`${file.name}-${index}`}>{file.name} <span>{formatBytes(file.size)}</span></li>)}</ul></div>}
-            {fileError && <p className="upload-client-error" role="alert">{fileError}</p>}
-            <button className="button button--secondary button--small upload-submit" type="button" disabled={!selectedCase || files.length === 0 || isUploading} onClick={() => void uploadSelectedFiles()}><UploadCloud size={15} /> {isUploading ? uploadProgress : 'Upload selected images'}</button>
-            {uploadNotice && <p className="upload-success" role="status">{uploadNotice}</p>}
-            {uploadError && <p className="upload-client-error" role="alert">{uploadError}</p>}
-          </div>
-          <div className="upload-guidance"><h3>Upload guidance</h3><ul><li>Use supported PNG, JPG, or JPEG files.</li><li>The server validates image content and size.</li><li>Choose an existing case owned by your account.</li><li>Files are stored by the backend and linked to the selected case.</li></ul></div>
-        </Panel>
-        <Panel title={`Images in selected case${caseId ? ` (${images.length})` : ''}`} className="uploaded-list-panel">
+      <div className="upload-layout">
+        <div className="upload-left-column">
+          <Panel title="Select case" className="upload-case-panel">
+            <div className="select-grid">
+              <label>Patient reference<select value={patientId} disabled={isLoadingCases || !hasLoadedData || isUploading || isAnalyzing} onChange={(event) => { setPatientId(event.target.value); setCaseId(''); setSelectedImageId(''); setAnalysisState('idle'); setAnalysisMessage(''); window.sessionStorage.removeItem(SELECTED_CASE_SESSION_KEY); setFiles([]); setFileError(''); setUploadNotice('') }}>
+                <option value="">{patients.length ? 'All patients' : isLoadingCases ? 'Loading patients…' : 'No patients available'}</option>
+                {patients.map((patient) => <option key={patient.id} value={patient.id}>{patient.patient_ref}</option>)}
+              </select></label>
+              <label>Case ID<select value={caseId} disabled={isLoadingCases || availableCases.length === 0 || isUploading || isAnalyzing} onChange={(event) => { const nextCaseId = event.target.value; setCaseId(nextCaseId); setSelectedImageId(''); setAnalysisState('idle'); setAnalysisMessage(''); if (nextCaseId) window.sessionStorage.setItem(SELECTED_CASE_SESSION_KEY, nextCaseId); else window.sessionStorage.removeItem(SELECTED_CASE_SESSION_KEY); setFiles([]); setFileError(''); setUploadNotice('') }}>
+                <option value="">{isLoadingCases ? 'Loading cases…' : availableCases.length ? 'Select a case' : 'No cases available'}</option>
+                {availableCases.map((item) => <option key={item.id} value={item.id}>{item.case_ref}</option>)}
+              </select></label>
+            </div>
+            {caseError && <div className="upload-inline-error" role="alert">{caseError}<button className="button button--secondary button--small" type="button" onClick={() => void reloadCases()}>Retry</button></div>}
+          </Panel>
+
+          <Panel title="Upload images" className="upload-drop-panel">
+            <div className="upload-dropzone">
+              <span className="upload-dropzone__icon"><UploadCloud size={27} /></span>
+              <strong>{selectedCase ? 'Add images to the selected case' : 'Select a case before adding images'}</strong>
+              <input ref={fileInputRef} className="upload-file-input" type="file" accept=".png,.jpg,.jpeg,image/png,image/jpeg" multiple disabled={!selectedCase || isUploading || isAnalyzing} onChange={(event) => chooseFiles(event.target.files)} aria-label="Choose image files" />
+              <button className="button button--primary button--small" type="button" disabled={!selectedCase || isUploading || isAnalyzing} onClick={() => fileInputRef.current?.click()}><UploadCloud size={15} /> Choose files</button>
+              {files.length > 0 && <div className="upload-selected-files"><strong>{files.length} file{files.length === 1 ? '' : 's'} selected</strong><ul>{files.map((file, index) => <li key={`${file.name}-${index}`}>{file.name} <span>{formatBytes(file.size)}</span></li>)}</ul></div>}
+              {fileError && <p className="upload-client-error" role="alert">{fileError}</p>}
+              <button className="button button--secondary button--small upload-submit" type="button" disabled={!selectedCase || files.length === 0 || isUploading || isAnalyzing} onClick={() => void uploadSelectedFiles()}><UploadCloud size={15} /> {isUploading ? uploadProgress : 'Upload selected images'}</button>
+              {uploadNotice && <p className="upload-success" role="status">{uploadNotice}</p>}
+              {uploadError && <p className="upload-client-error" role="alert">{uploadError}</p>}
+            </div>
+            <div className="upload-guidance"><h3>Upload guidance</h3><ul><li>Use supported PNG, JPG, or JPEG files.</li><li>The server validates image content and size.</li><li>Choose an existing case owned by your account.</li><li>Files are stored by the backend and linked to the selected case.</li><li>Server-enforced size limit is 10 MB by default.</li></ul></div>
+          </Panel>
+
+          <Panel title="Analysis" className="analysis-settings-panel">
+            <button className="button button--primary start-analysis-button" type="button" disabled={!selectedCase || !selectedImage || isAnalyzing || isUploading} onClick={() => void startAnalysis()}><Play size={15} /> {isAnalyzing ? 'Running analysis…' : 'Start analysis'}</button>
+            {(analysisState === 'failed' || analysisState === 'unavailable') && analysisMessage && <p className={`upload-analysis-feedback${analysisState === 'failed' ? ' upload-analysis-feedback--error' : ''}`} role={analysisState === 'failed' ? 'alert' : 'status'}>{analysisMessage}</p>}
+          </Panel>
+        </div>
+
+        <Panel title="Images" className="uploaded-list-panel">
           <div className="uploaded-list-head"><span>Preview</span><span>File name</span><span>Format</span><span>Size</span><span>Status</span><span>Preprocessing</span></div>
           {!caseId ? <div className="uploaded-list-empty"><FileImage size={20} /><span>Select a case</span><small>Choose a case to load its saved image records.</small></div> : isLoadingImages ? <div className="uploaded-list-empty" role="status"><FileImage size={20} /><span>Loading images…</span></div> : imageListError ? <div className="uploaded-list-empty"><FileImage size={20} /><span>Unable to load images</span><small>{imageListError}</small><button className="button button--secondary button--small" type="button" onClick={() => setRefreshImages((current) => current + 1)}>Retry</button></div> : images.length === 0 ? <div className="uploaded-list-empty"><FileImage size={20} /><span>No images uploaded</span><small>There are no saved images associated with this case.</small></div> : <div className="uploaded-image-list" aria-live="polite">
             {images.map((image) => <div className="uploaded-image-row" key={image.id}>
@@ -271,7 +306,7 @@ export default function UploadAnalysisPage() {
               <span className="uploaded-image-name" title={image.original_filename}>{image.original_filename}</span>
               <span>{image.media_type.split('/')[1]?.toUpperCase() ?? image.media_type}</span>
               <span>{formatBytes(image.size_bytes)}</span>
-              <span className="state-pill state-pill--muted">Saved</span>
+              <span className="uploaded-image-selection"><span className="state-pill state-pill--muted">Saved</span><label><input type="radio" name="analysis-image-selection" aria-label={`Select ${image.original_filename} for analysis`} checked={selectedImageId === image.id} disabled={isAnalyzing || isUploading || isLoadingImages} onChange={() => { setSelectedImageId(image.id); setAnalysisState('idle'); setAnalysisMessage('') }} /> Select for analysis</label></span>
               <div className="uploaded-preprocess-action">
                 {preprocessing[image.id]?.status !== 'completed' && <button className="button button--secondary button--small" type="button" disabled={preprocessing[image.id]?.loading} onClick={() => void preprocessImage(image)}>
                   {preprocessing[image.id]?.loading ? 'Processing…' : preprocessing[image.id]?.status === 'failed' ? 'Retry' : 'Preprocess'}
@@ -288,32 +323,6 @@ export default function UploadAnalysisPage() {
           </div>}
         </Panel>
       </div>
-      <div className="analysis-grid">
-        <Panel title="4. Preprocessing options" className="preprocessing-panel">
-          <label className="check-option"><input type="checkbox" disabled /> Noise reduction</label>
-          <label className="check-option"><input type="checkbox" disabled /> Contrast enhancement</label>
-          <label className="check-option"><input type="checkbox" disabled /> Resize to model input size</label>
-          <label className="check-option"><input type="checkbox" disabled /> Normalize intensity</label>
-          <label className="check-option check-option--recommended"><input type="checkbox" disabled /> Apply recommended preprocessing</label>
-          <p className="muted-hint"><SlidersHorizontal size={14} /> Options will be enabled with a configured processing pipeline.</p>
-        </Panel>
-        <Panel title="5. Analysis settings" className="analysis-settings-panel">
-          <label className="settings-label">Model version<select disabled defaultValue=""><option value="">No model configured</option></select></label>
-          <span className="settings-label">Analysis tasks</span>
-          <label className="check-option"><input type="checkbox" disabled /> Artery segmentation</label>
-          <label className="check-option"><input type="checkbox" disabled /> Stenosis detection</label>
-          <button className="button button--primary start-analysis-button" type="button" disabled><Play size={15} /> Start analysis</button>
-          <div className="not-configured-note"><Info size={15} /> Analysis unavailable until a real model is integrated.</div>
-        </Panel>
-        <Panel title="6. Analysis progress" className="progress-panel">
-          <div className="progress-state"><span className="state-pill state-pill--muted">Not configured</span></div>
-          <ol className="progress-steps">{stages.map((stage, index) => <li key={stage}><span className="progress-step-icon">{index === 0 ? <Clock3 size={14} /> : <Circle size={12} />}</span><span>{stage}</span><small>Waiting</small></li>)}</ol>
-        </Panel>
-      </div>
-      <Panel title="7. Activity log" className="activity-log-panel">
-        <div className="log-empty"><Activity size={16} /><span>No processing activity yet.</span></div>
-      </Panel>
-      <div className="page-bottom-note"><Check size={14} /> Selected images are stored by the backend. Analysis is unavailable; no predictions or measurements are generated.</div>
     </div>
   )
 }

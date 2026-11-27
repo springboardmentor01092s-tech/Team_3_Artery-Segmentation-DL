@@ -1,10 +1,8 @@
 import { useMemo, useState } from 'react'
-import { ArrowRight, Download, Eye, Pencil, Plus, UsersRound } from 'lucide-react'
+import { ArrowRight, Eye, Pencil, Plus, Search, UsersRound } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import EmptyState from '../components/EmptyState'
-import PageHeader from '../components/PageHeader'
 import Panel from '../components/Panel'
-import WorkspaceNotice from '../components/WorkspaceNotice'
 import PatientFormDialog from '../features/patients/PatientFormDialog'
 import { usePatients } from '../features/patients/usePatients'
 import type { PatientPayload } from '../features/patients/types'
@@ -68,37 +66,35 @@ export default function PatientsPage() {
   }
 
   return (
-    <div className="feature-page">
-      <WorkspaceNotice />
-      <PageHeader title="Patient Management" description="Manage patient records and their imaging cases." action={<>
-        <button className="button button--secondary button--small" type="button" disabled title="Patient import is not supported by the existing backend API."><Download size={15} /> Import patient data</button>
+    <div className="feature-page patients-page">
+      <div className="patients-toolbar">
+        <div className="module-tabs" role="tablist" aria-label="Patient and case modules">
+          <Link className="module-tab module-tab--active" role="tab" aria-selected="true" to="/patients"><UsersRound size={15} /> Patients</Link>
+          <Link className="module-tab" role="tab" aria-selected="false" to="/cases">Cases <ArrowRight size={14} /></Link>
+        </div>
         <button className="button button--primary button--small" type="button" disabled={!hasLoadedData} title={!hasLoadedData ? 'Load patient records before creating a patient.' : undefined} onClick={() => { setFeedback(''); setDialog('create') }}><Plus size={16} /> Add new patient</button>
-      </>} />
-      <div className="module-tabs" role="tablist" aria-label="Patient and case modules">
-        <Link className="module-tab module-tab--active" role="tab" aria-selected="true" to="/patients"><UsersRound size={15} /> Patients</Link>
-        <Link className="module-tab" role="tab" aria-selected="false" to="/cases">Cases <ArrowRight size={14} /></Link>
       </div>
       {feedback && <div className="case-feedback" role="status">{feedback}<button type="button" aria-label="Dismiss message" onClick={() => setFeedback('')}>×</button></div>}
       {error && <div className="case-error" role="alert"><span>{error}</span><button className="button button--secondary button--small" type="button" onClick={() => void reload()}>Retry</button></div>}
-      <div className="management-layout">
-        <Panel title={`Patients (${patients.length})`} className="management-list-panel">
-          <div className="list-toolbar">
-            <input type="search" placeholder="Search patient references..." aria-label="Search patients" value={query} onChange={(event) => changeFilters(event.target.value, caseFilter)} />
+      <Panel title={`Patients (${patients.length})`} className="patients-table-panel" action={<label className="patient-table-search"><Search size={14} aria-hidden="true" /><input type="search" placeholder="Search patient references…" aria-label="Search patients" value={query} onChange={(event) => changeFilters(event.target.value, caseFilter)} /></label>}>
+          <div className="list-toolbar patient-case-filter-toolbar">
             <select aria-label="Filter patients by case association" value={caseFilter} onChange={(event) => changeFilters(query, event.target.value)}>
               <option value="all">All patients</option><option value="with-cases">With cases</option><option value="without-cases">Without cases</option>
             </select>
           </div>
-          <div className="data-table-wrap">
+          <div className={`data-table-wrap patient-table-wrap${isLoading || filteredPatients.length === 0 ? ' patient-table-wrap--message' : ''}`}>
             <table className="data-table patient-table">
-              <thead><tr>{['Patient reference', 'No. of cases', 'Created on', 'Actions'].map((name) => <th key={name} scope="col">{name}</th>)}</tr></thead>
+              <colgroup><col className="patient-col-reference" /><col className="patient-col-cases" /><col className="patient-col-created" /><col className="patient-col-owner" /><col className="patient-col-actions" /></colgroup>
+              <thead><tr>{['Patient reference', 'No. of cases', 'Created on', 'Created By', 'Actions'].map((name, index) => <th key={name} className={`patient-table__cell-${index + 1}`} scope="col">{name}</th>)}</tr></thead>
               <tbody>
-                {isLoading ? <tr><td colSpan={4}><div className="case-table-message" role="status">Loading patients…</div></td></tr> : filteredPatients.length === 0 ? (
-                  <tr><td colSpan={4}><EmptyState icon={UsersRound} title={patients.length ? 'No matching patients' : 'No patient records'} description={patients.length ? 'Adjust the search or case filter.' : 'Add a patient record to make it available for case creation.'} /></td></tr>
+                {isLoading ? <tr><td colSpan={5}><div className="case-table-message" role="status">Loading patients…</div></td></tr> : filteredPatients.length === 0 ? (
+                  <tr><td colSpan={5}><EmptyState icon={UsersRound} title={patients.length ? 'No matching patients' : 'No patient records'} description={patients.length ? 'Adjust the search or case filter.' : 'Add a patient record to make it available for case creation.'} /></td></tr>
                 ) : visiblePatients.map((patient) => <tr key={patient.id} className={selectedPatient?.id === patient.id ? 'case-row case-row--selected' : 'case-row'}>
-                  <td><button className="case-ref-button" type="button" onClick={() => void openPatient(patient.id)}>{patient.patient_ref}</button></td>
-                  <td>{casesByPatient.get(patient.id)?.length ?? 0}</td>
-                  <td>{formatDate(patient.created_at)}</td>
-                  <td><div className="case-row-actions">
+                  <td className="patient-table__cell-1"><button className="case-ref-button" type="button" onClick={() => void openPatient(patient.id)}>{patient.patient_ref}</button></td>
+                  <td className="patient-table__cell-2">{casesByPatient.get(patient.id)?.length ?? 0}</td>
+                  <td className="patient-table__cell-3">{formatDate(patient.created_at)}</td>
+                  <td className="patient-table__cell-4">{patient.owner_name?.trim() || 'Not available'}</td>
+                  <td className="patient-table__cell-5"><div className="case-row-actions">
                     <button className="case-icon-button" type="button" aria-label={`View ${patient.patient_ref}`} title="View patient details" onClick={() => void openPatient(patient.id)}><Eye size={15} /></button>
                     <button className="case-icon-button" type="button" aria-label={`Edit ${patient.patient_ref}`} title="Edit patient reference" onClick={async () => { const opened = await openPatient(patient.id); if (opened) setDialog('edit') }}><Pencil size={14} /></button>
                   </div></td>
@@ -111,21 +107,20 @@ export default function PatientsPage() {
             <button className="pagination-current" type="button" aria-current="page">{page} / {pageCount}</button>
             <button type="button" onClick={() => setPage((current) => Math.min(pageCount, current + 1))} disabled={page >= pageCount} aria-label="Next page">›</button>
           </div></div>
-        </Panel>
-        <div className="management-detail-stack">
-          <Panel title="Patient details" action={selectedPatient && <button className="button button--secondary button--small" type="button" onClick={() => { setFeedback(''); setDialog('edit') }}><Pencil size={14} /> Edit reference</button>}>
+      </Panel>
+      <div className="patients-bottom-grid">
+          <Panel title="Patient details" className="patient-details-panel" action={selectedPatient && <button className="button button--secondary button--small" type="button" onClick={() => { setFeedback(''); setDialog('edit') }}><Pencil size={14} /> Edit reference</button>}>
             {selectedPatient ? <div className="patient-detail-list">
               <div><span>Patient reference</span><strong>{selectedPatient.patient_ref}</strong></div>
               <div><span>Created on</span><strong>{formatDate(selectedPatient.created_at)}</strong></div>
               <div><span>Associated cases</span><strong>{casesByPatient.get(selectedPatient.id)?.length ?? 0}</strong></div>
             </div> : <EmptyState icon={UsersRound} title={isLoading ? 'Loading patients' : 'Select a patient'} description="Open a patient record to review its reference and associated cases." />}
           </Panel>
-          <Panel title="Cases for patient" action={<Link className="link-button" to="/cases">Case Management <ArrowRight size={14} /></Link>}>
+          <Panel title="Cases for patient" className="patient-cases-panel" action={<Link className="link-button" to="/cases">Case Management <ArrowRight size={14} /></Link>}>
             {selectedPatient ? (casesByPatient.get(selectedPatient.id)?.length ? <div className="patient-associated-cases">
               {(casesByPatient.get(selectedPatient.id) ?? []).map((item) => <div key={item.id}><span><strong>{item.case_ref}</strong><small>{item.modality || 'Modality not specified'}</small></span><Link to="/cases" aria-label={`Open case management for ${item.case_ref}`}><ArrowRight size={15} /></Link></div>)}
             </div> : <EmptyState icon={ArrowRight} title="No cases for this patient" description="Cases linked to this patient will appear here." />) : <EmptyState icon={ArrowRight} title="No patient selected" description="Choose a patient record to review linked cases." />}
           </Panel>
-        </div>
       </div>
       {dialog && <PatientFormDialog mode={dialog} patient={dialog === 'edit' ? selectedPatient ?? undefined : undefined} onClose={() => setDialog(null)} onSubmit={submitPatient} />}
     </div>

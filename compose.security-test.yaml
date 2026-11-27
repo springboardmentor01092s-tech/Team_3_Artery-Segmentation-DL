@@ -1,0 +1,20 @@
+services:
+  security-test-db:
+    image: postgres:16-alpine
+    profiles: ["security-test"]
+    environment:
+      POSTGRES_DB: coronai_security_test
+      POSTGRES_USER: coronai_security_test
+      POSTGRES_PASSWORD: ${CORONAI_SECURITY_TEST_POSTGRES_PASSWORD:?Set a temporary test-only password}
+    ports:
+      - "127.0.0.1:55433:5432"
+    volumes:
+      - artery_security_test_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  artery_security_test_postgres_data:

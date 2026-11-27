@@ -1,0 +1,9 @@
+image_id,severity_category,estimated_narrowing_percent,assessment_status,reason,predicted_severity
+1,Unclassified,,Awaiting validated diameter measurements,Validated minimum and reference lumen diameters unavailable,Unclassified
+10,Unclassified,,Awaiting validated diameter measurements,Validated minimum and reference lumen diameters unavailable,Unclassified
+100,Unclassified,,Awaiting validated diameter measurements,Validated minimum and reference lumen diameters unavailable,Unclassified
+1000,Unclassified,,Awaiting validated diameter measurements,Validated minimum and reference lumen diameters unavailable,Unclassified
+101,Unclassified,,Awaiting validated diameter measurements,Validated minimum and reference lumen diameters unavailable,Unclassified
+102,Unclassified,,Awaiting validated diameter measurements,Validated minimum and reference lumen diameters unavailable,Unclassified
+103,Unclassified,,Awaiting validated diameter measurements,Validated minimum and reference lumen diameters unavailable,Unclassified
+104,Unclassified,,Awaiting validated diameter measurements,Validated minimum and reference lumen diameters unavailable,Unclassified

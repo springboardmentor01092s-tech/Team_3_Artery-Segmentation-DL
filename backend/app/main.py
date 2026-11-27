@@ -9,7 +9,7 @@ settings = get_settings()
 app = FastAPI(
     title="Artery Segmentation and Stenosis Detection API",
     version="0.1.0",
-    description="Backend foundation. AI inference is not configured and no clinical results are generated.",
+    description="Synchronous, owner-scoped segmentation inference is available through an isolated ML runtime. Outputs are not clinically validated.",
 )
 app.add_middleware(
     CORSMiddleware,

@@ -24,6 +24,7 @@ class CaseRead(BaseModel):
 
     id: UUID
     owner_id: UUID
+    owner_name: str | None = None
     patient_id: UUID
     case_ref: str
     modality: str | None

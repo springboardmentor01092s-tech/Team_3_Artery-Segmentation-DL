@@ -4,6 +4,10 @@ from app.models.image import MedicalImage
 from app.models.image_preprocessing import ImagePreprocessing
 from app.models.notification import Notification
 from app.models.patient import Patient
+from app.models.security_state import EmailChangeVerification, LoginRateLimitBucket
 from app.models.user import User
 
-__all__ = ["AnalysisRun", "Case", "ImagePreprocessing", "MedicalImage", "Notification", "Patient", "User"]
+__all__ = [
+    "AnalysisRun", "Case", "EmailChangeVerification", "ImagePreprocessing", "LoginRateLimitBucket",
+    "MedicalImage", "Notification", "Patient", "User",
+]

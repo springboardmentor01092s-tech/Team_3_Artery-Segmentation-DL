@@ -1,0 +1,9 @@
+image_id,minimum_diameter_pixels,estimated_narrowing_percent,predicted_severity,assessment_status
+1,2.0,87.87,Critical,Experimental mask-based estimate; validation required
+10,6.0,40.0,Mild / Outside 3 target classes,Experimental mask-based estimate; validation required
+100,4.0,66.67,Moderate,Experimental mask-based estimate; validation required
+101,2.0,75.75,Critical,Experimental mask-based estimate; validation required
+102,4.0,60.0,Moderate,Experimental mask-based estimate; validation required
+103,6.0,27.24,Mild / Outside 3 target classes,Experimental mask-based estimate; validation required
+104,6.0,27.24,Mild / Outside 3 target classes,Experimental mask-based estimate; validation required
+1000,2.0,80.0,Critical,Experimental mask-based estimate; validation required

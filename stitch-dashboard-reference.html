@@ -1,0 +1,1044 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Artery Analysis System</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">/** @type {import('tailwindcss').Config} */
+globalThis.tailwind = globalThis.tailwind || {};
+globalThis.tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        'success': '#047857',
+        'on-success': '#FFFFFF',
+        'warning': '#B45309',
+        'on-warning': '#FFFFFF',
+        'info': '#0369A1',
+        'on-info': '#FFFFFF',
+        'light-primary': '#0037B0',
+        'light-on-primary': '#FFFFFF',
+        'light-primary-container': '#1D4ED8',
+        'light-on-primary-container': '#FFFFFF',
+        'light-secondary': '#006A61',
+        'light-on-secondary': '#FFFFFF',
+        'light-secondary-container': '#86F2E4',
+        'light-on-secondary-container': '#003732',
+        'light-tertiary': '#3526BD',
+        'light-on-tertiary': '#FFFFFF',
+        'light-tertiary-container': '#4E45D5',
+        'light-on-tertiary-container': '#FFFFFF',
+        'light-error': '#BA1A1A',
+        'light-on-error': '#FFFFFF',
+        'light-error-container': '#FFDAD6',
+        'light-on-error-container': '#93000A',
+        'light-background': '#F7F8FC',
+        'light-on-background': '#1A1B23',
+        'light-surface': '#F7F8FC',
+        'light-surface-dim': '#D9D9E5',
+        'light-surface-bright': '#FFFFFF',
+        'light-surface-container-lowest': '#FFFFFF',
+        'light-surface-container-low': '#F3F2FE',
+        'light-surface-container': '#EDEDF9',
+        'light-surface-container-high': '#E8E7F3',
+        'light-surface-container-highest': '#E2E1ED',
+        'light-on-surface': '#1A1B23',
+        'light-surface-variant': '#E0E1F4',
+        'light-on-surface-variant': '#434655',
+        'light-outline': '#747686',
+        'light-outline-variant': '#C4C5D7',
+        'light-inverse-surface': '#2E3039',
+        'light-inverse-on-surface': '#F0F0FB',
+        'light-inverse-primary': '#B7C4FF',
+        'dark-primary': '#B7C4FF',
+        'dark-on-primary': '#002682',
+        'dark-primary-container': '#1D4ED8',
+        'dark-on-primary-container': '#FFFFFF',
+        'dark-secondary': '#6BD8CB',
+        'dark-on-secondary': '#003732',
+        'dark-secondary-container': '#005049',
+        'dark-on-secondary-container': '#89F5E7',
+        'dark-tertiary': '#C3C0FF',
+        'dark-on-tertiary': '#1F00A4',
+        'dark-tertiary-container': '#4E45D5',
+        'dark-on-tertiary-container': '#FFFFFF',
+        'dark-error': '#FFB4AB',
+        'dark-on-error': '#690005',
+        'dark-error-container': '#93000A',
+        'dark-on-error-container': '#FFDAD6',
+        'dark-background': '#0F121A',
+        'dark-on-background': '#E2E1ED',
+        'dark-surface': '#0F121A',
+        'dark-surface-dim': '#0C0E16',
+        'dark-surface-bright': '#373942',
+        'dark-surface-container-lowest': '#0C0E16',
+        'dark-surface-container-low': '#171A24',
+        'dark-surface-container': '#1E222E',
+        'dark-surface-container-high': '#282C3A',
+        'dark-surface-container-highest': '#333747',
+        'dark-on-surface': '#E2E1ED',
+        'dark-surface-variant': '#282C3A',
+        'dark-on-surface-variant': '#C4C5D7',
+        'dark-outline': '#8E90A0',
+        'dark-outline-variant': '#3B3F52',
+        'dark-inverse-surface': '#E2E1ED',
+        'dark-inverse-on-surface': '#1A1B23',
+        'dark-inverse-primary': '#2151DA',
+      },
+      borderRadius: {
+        'sm': '4px',
+        'DEFAULT': '8px',
+        'md': '12px',
+        'lg': '16px',
+        'xl': '24px',
+        'full': '9999px',
+      },
+      spacing: {
+        'gutter-xs': '4px',
+        'gutter-sm': '8px',
+        'gutter-md': '16px',
+        'gutter-lg': '24px',
+        'gutter-xl': '32px',
+        'section': '40px',
+        'page-margin': '24px',
+      },
+      fontFamily: {
+        'display': ['"Mulish"', 'sans-serif'],
+        'headline': ['"Mulish"', 'sans-serif'],
+        'title': ['"Instrument Sans"', 'sans-serif'],
+        'body': ['"Instrument Sans"', 'sans-serif'],
+        'label': ['"Instrument Sans"', 'sans-serif'],
+        'mono': ['"Source Code Pro"', 'monospace'],
+      },
+      fontSize: {
+        'display-md': ['36px', { lineHeight: '44px', letterSpacing: '-0.5px', fontWeight: '700' }],
+        'display-md-mobile': ['28px', { lineHeight: '36px', letterSpacing: '-0.25px', fontWeight: '700' }],
+        'headline-lg': ['28px', { lineHeight: '36px', letterSpacing: '-0.25px', fontWeight: '700' }],
+        'headline-md': ['22px', { lineHeight: '28px', letterSpacing: '-0.15px', fontWeight: '700' }],
+        'headline-sm': ['18px', { lineHeight: '24px', letterSpacing: '0px', fontWeight: '700' }],
+        'title-md': ['16px', { lineHeight: '22px', letterSpacing: '0px', fontWeight: '600' }],
+        'title-sm': ['14px', { lineHeight: '20px', letterSpacing: '0px', fontWeight: '600' }],
+        'body-md': ['14px', { lineHeight: '20px', letterSpacing: '0px', fontWeight: '400' }],
+        'body-sm': ['12px', { lineHeight: '16px', letterSpacing: '0.1px', fontWeight: '400' }],
+        'label-lg': ['14px', { lineHeight: '20px', letterSpacing: '0.1px', fontWeight: '600' }],
+        'label-md': ['12px', { lineHeight: '16px', letterSpacing: '0.2px', fontWeight: '600' }],
+        'label-sm': ['11px', { lineHeight: '14px', letterSpacing: '0.3px', fontWeight: '500' }],
+        'mono-sm': ['12px', { lineHeight: '16px', letterSpacing: '0px', fontWeight: '500' }],
+      },
+      transitionDuration: {
+        'state-change': '150ms',
+        'surface-enter': '250ms',
+        'surface-exit': '150ms',
+      },
+      transitionDelay: {
+        'state-change': '0ms',
+        'surface-enter': '0ms',
+        'surface-exit': '0ms',
+      },
+      transitionTimingFunction: {
+        'state-change': 'ease-out',
+        'surface-enter': 'cubic-bezier(0.2, 0, 0, 1)',
+        'surface-exit': 'cubic-bezier(0.3, 0, 1, 1)',
+      },
+    },
+  },
+};
+if (typeof module !== 'undefined') module.exports = globalThis.tailwind.config;
+</script>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=Mulish:wght@600;700;800&amp;family=Source+Code+Pro:wght@500;600&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet">
+  <style>
+    .material-symbols-outlined, .material-symbols-rounded, .material-symbols-sharp, .material-icons {
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      line-height: 1 !important;
+      box-sizing: content-box;
+      overflow: hidden;
+      white-space: nowrap;
+      direction: ltr;
+      vertical-align: middle;
+    }
+    .sidebar-collapsed .sidebar-label,
+    .sidebar-collapsed .sidebar-brand-text,
+    .sidebar-collapsed .sidebar-section-label {
+      display: none;
+    }
+    .sidebar-collapsed .sidebar-nav-link {
+      justify-content: center;
+      padding-left: 0;
+      padding-right: 0;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-light-surface text-light-on-surface dark:bg-dark-surface dark:text-dark-on-surface font-body antialiased selection:bg-light-primary selection:text-light-on-primary">
+
+  <!-- Root App Shell (min-h-screen, never h-screen) -->
+  <div id="app-shell" class="min-h-[1024px] flex flex-col lg:flex-row bg-light-surface dark:bg-dark-surface transition-colors duration-state-change ease-state-change" data-stitch-vh="min-h-[1024px]===min-h-screen">
+
+    <!-- Mobile Sidebar Backdrop -->
+    <div id="mobile-backdrop" class="fixed inset-0 z-30 bg-light-inverse-surface/40 dark:bg-dark-surface-dim/70 hidden lg:hidden" aria-hidden="true"></div>
+
+    <!-- Collapsible Left Sidebar -->
+    <aside id="sidebar" class="fixed inset-y-0 left-0 z-40 w-64 lg:static lg:z-auto min-h-[1024px] flex flex-col justify-between border-r border-light-outline-variant dark:border-dark-outline-variant bg-light-surface-container-lowest dark:bg-dark-surface-container-low -translate-x-full lg:translate-x-0 transition-transform duration-surface-enter ease-surface-enter shrink-0" data-stitch-vh="min-h-[1024px]===min-h-screen">
+      <div>
+        <!-- Brand Header -->
+        <div class="h-16 px-gutter-md flex items-center justify-between border-b border-light-outline-variant dark:border-dark-outline-variant">
+          <a href="#dashboard" class="flex items-center gap-gutter-sm min-w-0">
+            <span class="w-9 h-9 rounded-md bg-gradient-to-br from-light-primary to-light-tertiary dark:from-dark-primary-container dark:to-dark-tertiary-container flex items-center justify-center text-light-on-primary dark:text-dark-on-primary-container shrink-0 shadow-sm">
+              <span class="material-symbols-outlined text-headline-sm" style="font-variation-settings: &#39;FILL&#39; 1;" aria-hidden="true">monitor_heart</span>
+            </span>
+            <div class="sidebar-brand-text flex flex-col min-w-0">
+              <span class="font-headline text-title-sm text-light-on-surface dark:text-dark-on-surface leading-tight" data-design-text-token="title-sm">Artery Analysis</span>
+              <span class="text-label-sm text-light-on-surface-variant dark:text-dark-on-surface-variant" data-design-text-token="label-sm">Research Platform</span>
+            </div>
+          </a>
+          <button id="sidebar-collapse-btn" type="button" aria-label="Collapse sidebar" class="hidden lg:inline-flex items-center justify-center w-8 h-8 rounded text-light-on-surface-variant dark:text-dark-on-surface-variant hover:bg-light-surface-container-low dark:hover:bg-dark-surface-container transition-colors duration-state-change ease-state-change">
+            <span id="sidebar-collapse-icon" class="material-symbols-outlined text-title-md" aria-hidden="true">dock_to_left</span>
+          </button>
+          <button id="mobile-close-btn" type="button" aria-label="Close navigation" class="lg:hidden inline-flex items-center justify-center w-8 h-8 rounded text-light-on-surface-variant dark:text-dark-on-surface-variant hover:bg-light-surface-container-low dark:hover:bg-dark-surface-container">
+            <span class="material-symbols-outlined text-title-md" aria-hidden="true">close</span>
+          </button>
+        </div>
+
+        <!-- Primary Navigation -->
+        <div class="p-gutter-md flex flex-col gap-gutter-lg">
+          <nav aria-label="Main menu">
+            <p class="sidebar-section-label px-gutter-sm mb-gutter-xs font-label text-label-sm uppercase tracking-wider text-light-on-surface-variant dark:text-dark-on-surface-variant" data-design-text-token="label-sm">Workspace</p>
+            <ul data-component-id="list-interactive" data-component-type="list" data-component-variant="interactive" class="flex flex-col gap-gutter-xs">
+              <li>
+                <a href="#dashboard" aria-current="page" class="sidebar-nav-link flex items-center gap-gutter-sm px-gutter-md py-gutter-sm rounded-md bg-light-primary text-light-on-primary dark:bg-dark-primary-container dark:text-dark-on-primary-container font-label text-label-lg shadow-sm transition-colors duration-state-change ease-state-change" title="Dashboard">
+                  <span class="material-symbols-outlined text-headline-sm shrink-0" style="font-variation-settings: &#39;FILL&#39; 1;" aria-hidden="true">dashboard</span>
+                  <span class="sidebar-label" data-design-text-token="label-lg">Dashboard</span>
+                </a>
+              </li>
+              <li>
+                <a href="#patients" class="sidebar-nav-link nav-toast-link flex items-center gap-gutter-sm px-gutter-md py-gutter-sm rounded-md text-light-on-surface-variant dark:text-dark-on-surface-variant hover:bg-light-surface-container-low dark:hover:bg-dark-surface-container hover:text-light-on-surface dark:hover:text-dark-on-surface font-label text-label-lg transition-colors duration-state-change ease-state-change" title="Patients">
+                  <span class="material-symbols-outlined text-headline-sm shrink-0" aria-hidden="true">group</span>
+                  <span class="sidebar-label" data-design-text-token="label-lg">Patients</span>
+                </a>
+              </li>
+              <li>
+                <a href="#cases" class="sidebar-nav-link nav-toast-link flex items-center gap-gutter-sm px-gutter-md py-gutter-sm rounded-md text-light-on-surface-variant dark:text-dark-on-surface-variant hover:bg-light-surface-container-low dark:hover:bg-dark-surface-container hover:text-light-on-surface dark:hover:text-dark-on-surface font-label text-label-lg transition-colors duration-state-change ease-state-change" title="Cases">
+                  <span class="material-symbols-outlined text-headline-sm shrink-0" aria-hidden="true">folder_shared</span>
+                  <span class="sidebar-label" data-design-text-token="label-lg">Cases</span>
+                </a>
+              </li>
+              <li>
+                <a href="#upload" class="sidebar-nav-link nav-toast-link flex items-center gap-gutter-sm px-gutter-md py-gutter-sm rounded-md text-light-on-surface-variant dark:text-dark-on-surface-variant hover:bg-light-surface-container-low dark:hover:bg-dark-surface-container hover:text-light-on-surface dark:hover:text-dark-on-surface font-label text-label-lg transition-colors duration-state-change ease-state-change" title="Image Upload &amp; Analysis">
+                  <span class="material-symbols-outlined text-headline-sm shrink-0" aria-hidden="true">add_photo_alternate</span>
+                  <span class="sidebar-label truncate" data-design-text-token="label-lg">Upload &amp; Analysis</span>
+                </a>
+              </li>
+              <li>
+                <a href="#results" class="sidebar-nav-link nav-toast-link flex items-center gap-gutter-sm px-gutter-md py-gutter-sm rounded-md text-light-on-surface-variant dark:text-dark-on-surface-variant hover:bg-light-surface-container-low dark:hover:bg-dark-surface-container hover:text-light-on-surface dark:hover:text-dark-on-surface font-label text-label-lg transition-colors duration-state-change ease-state-change" title="Results">
+                  <span class="material-symbols-outlined text-headline-sm shrink-0" aria-hidden="true">analytics</span>
+                  <span class="sidebar-label" data-design-text-token="label-lg">Results</span>
+                </a>
+              </li>
+              <li>
+                <a href="#reports" class="sidebar-nav-link nav-toast-link flex items-center gap-gutter-sm px-gutter-md py-gutter-sm rounded-md text-light-on-surface-variant dark:text-dark-on-surface-variant hover:bg-light-surface-container-low dark:hover:bg-dark-surface-container hover:text-light-on-surface dark:hover:text-dark-on-surface font-label text-label-lg transition-colors duration-state-change ease-state-change" title="Reports">
+                  <span class="material-symbols-outlined text-headline-sm shrink-0" aria-hidden="true">description</span>
+                  <span class="sidebar-label" data-design-text-token="label-lg">Reports</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+
+          <div class="border-t border-light-outline-variant dark:border-dark-outline-variant pt-gutter-md">
+            <p class="sidebar-section-label px-gutter-sm mb-gutter-xs font-label text-label-sm uppercase tracking-wider text-light-on-surface-variant dark:text-dark-on-surface-variant" data-design-text-token="label-sm">Administration</p>
+            <ul class="flex flex-col gap-gutter-xs">
+              <li>
+                <a href="#users" class="sidebar-nav-link nav-toast-link flex items-center gap-gutter-sm px-gutter-md py-gutter-sm rounded-md text-light-on-surface-variant dark:text-dark-on-surface-variant hover:bg-light-surface-container-low dark:hover:bg-dark-surface-container hover:text-light-on-surface dark:hover:text-dark-on-surface font-label text-label-lg transition-colors duration-state-change ease-state-change" title="Users">
+                  <span class="material-symbols-outlined text-headline-sm shrink-0" aria-hidden="true">manage_accounts</span>
+                  <span class="sidebar-label" data-design-text-token="label-lg">Users</span>
+                </a>
+              </li>
+              <li>
+                <a href="#settings" class="sidebar-nav-link nav-toast-link flex items-center gap-gutter-sm px-gutter-md py-gutter-sm rounded-md text-light-on-surface-variant dark:text-dark-on-surface-variant hover:bg-light-surface-container-low dark:hover:bg-dark-surface-container hover:text-light-on-surface dark:hover:text-dark-on-surface font-label text-label-lg transition-colors duration-state-change ease-state-change" title="Settings">
+                  <span class="material-symbols-outlined text-headline-sm shrink-0" aria-hidden="true">settings</span>
+                  <span class="sidebar-label" data-design-text-token="label-lg">Settings</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar Footer: Pipeline Status -->
+      <div class="p-gutter-md border-t border-light-outline-variant dark:border-dark-outline-variant">
+        <div class="sidebar-label rounded-md bg-light-surface-container-low dark:bg-dark-surface-container p-gutter-sm flex items-center gap-gutter-sm">
+          <span class="w-2.5 h-2.5 rounded-full bg-light-secondary dark:bg-dark-secondary shrink-0" aria-hidden="true"></span>
+          <div class="min-w-0">
+            <p class="font-label text-label-md text-light-on-surface dark:text-dark-on-surface" data-design-text-token="label-md">Segmentation Engine</p>
+            <p class="text-body-sm text-light-on-surface-variant dark:text-dark-on-surface-variant" data-design-text-token="body-sm">Ready · 0 queued</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Workspace Column -->
+    <div class="flex-1 flex flex-col min-w-0">
+
+      <!-- Sticky Top Utility Bar -->
+      <header class="sticky top-0 z-20 h-16 px-gutter-md sm:px-gutter-lg border-b border-light-outline-variant dark:border-dark-outline-variant bg-light-surface-container-lowest dark:bg-dark-surface-container-low flex items-center justify-between gap-gutter-md">
+        <div class="flex items-center gap-gutter-sm sm:gap-gutter-md min-w-0">
+          <button id="mobile-menu-btn" type="button" aria-label="Open navigation" class="lg:hidden inline-flex items-center justify-center w-9 h-9 rounded-md border border-light-outline-variant dark:border-dark-outline-variant text-light-on-surface dark:text-dark-on-surface shrink-0">
+            <span class="material-symbols-outlined text-headline-sm" aria-hidden="true">menu</span>
+          </button>
+          <div class="min-w-0">
+            <h1 class="font-headline text-headline-sm text-light-on-surface dark:text-dark-on-surface truncate" data-design-text-token="headline-sm">Artery Analysis System</h1>
+            <p class="hidden sm:block text-body-sm text-light-on-surface-variant dark:text-dark-on-surface-variant truncate" data-design-text-token="body-sm">Coronary artery segmentation &amp; stenosis detection research</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-gutter-sm shrink-0">
+          <!-- Interactive Light / Dark Theme Switcher -->
+          <div class="inline-flex items-center p-gutter-xs rounded-md border border-light-outline-variant dark:border-dark-outline-variant bg-light-surface-container-low dark:bg-dark-surface-container" role="group" aria-label="Theme switcher">
+            <button id="theme-light-btn" type="button" class="inline-flex items-center gap-gutter-xs px-gutter-sm py-gutter-xs rounded font-label text-label-md bg-light-surface-container-lowest text-light-primary dark:bg-transparent dark:text-dark-on-surface-variant shadow-sm dark:shadow-none transition-colors duration-state-change ease-state-change">
+              <span class="material-symbols-outlined text-title-sm" aria-hidden="true">light_mode</span>
+              <span class="hidden sm:inline" data-design-text-token="label-md">Light</span>
+            </button>
+            <button id="theme-dark-btn" type="button" class="inline-flex items-center gap-gutter-xs px-gutter-sm py-gutter-xs rounded font-label text-label-md bg-transparent text-light-on-surface-variant dark:bg-dark-surface-container-high dark:text-dark-primary transition-colors duration-state-change ease-state-change">
+              <span class="material-symbols-outlined text-title-sm" aria-hidden="true">dark_mode</span>
+              <span class="hidden sm:inline" data-design-text-token="label-md">Dark</span>
+            </button>
+          </div>
+
+          <!-- Notifications Button -->
+          <button id="notif-btn" data-component-id="button-icon" data-component-type="button" data-component-variant="icon" type="button" aria-label="Notifications" class="relative inline-flex items-center justify-center w-10 h-10 rounded-md border border-light-outline-variant dark:border-dark-outline-variant bg-light-surface-container-lowest dark:bg-dark-surface-container text-light-on-surface-variant dark:text-dark-on-surface-variant hover:bg-light-surface-container-low dark:hover:bg-dark-surface-container-high hover:text-light-on-surface dark:hover:text-dark-on-surface transition-colors duration-state-change ease-state-change">
+            <span class="material-symbols-outlined text-headline-sm" aria-hidden="true">notifications</span>
+            <span data-component-id="badge-dot" data-component-type="badge" data-component-variant="dot" role="status" aria-label="Recent updates available" class="absolute top-2 right-2 w-2 h-2 rounded-full bg-light-secondary dark:bg-dark-secondary"></span>
+          </button>
+
+          <!-- User Profile Chip -->
+          <div class="flex items-center gap-gutter-sm pl-gutter-sm border-l border-light-outline-variant dark:border-dark-outline-variant">
+            <div class="w-9 h-9 rounded-full bg-light-primary text-light-on-primary dark:bg-dark-primary-container dark:text-dark-on-primary-container flex items-center justify-center font-headline text-title-sm shrink-0">
+              <span data-design-text-token="title-sm">A</span>
+            </div>
+            <div class="hidden md:flex flex-col">
+              <span class="font-title text-title-sm text-light-on-surface dark:text-dark-on-surface leading-tight" data-design-text-token="title-sm">admin@example.com</span>
+              <span class="text-body-sm text-light-on-surface-variant dark:text-dark-on-surface-variant" data-design-text-token="body-sm">Administrator · <button type="button" id="signout-btn" class="underline hover:text-light-primary dark:hover:text-dark-primary">Sign out</button></span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Dashboard Content -->
+      <main class="flex-1 p-gutter-md sm:p-gutter-lg flex flex-col gap-gutter-lg max-w-[1440px] w-full mx-auto">
+
+        <!-- Page Intro Header -->
+        <section class="flex flex-col sm:flex-row sm:items-center justify-between gap-gutter-md">
+          <div>
+            <h2 class="font-headline text-headline-md text-light-on-surface dark:text-dark-on-surface" data-design-text-token="headline-md">Research Overview</h2>
+            <p class="text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant text-pretty" data-design-text-token="body-md">Monitor registered cases, uploaded angiogram frames, and saved segmentation runs.</p>
+          </div>
+          <div class="flex items-center gap-gutter-sm shrink-0">
+            <button id="top-create-case-btn" data-component-id="button-primary" data-component-type="button" data-component-variant="primary" type="button" class="inline-flex items-center justify-center gap-gutter-sm px-gutter-md py-gutter-sm rounded-md bg-light-primary text-light-on-primary hover:bg-light-primary-container dark:bg-dark-primary-container dark:text-dark-on-primary-container font-label text-label-lg transition-colors duration-state-change ease-state-change shadow-sm whitespace-nowrap">
+              <span class="material-symbols-outlined text-title-md" aria-hidden="true">add</span>
+              <span data-design-text-token="label-lg">Create new case</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- Row 1: Top 4 KPI Statistic Cards with Subtle Gradients -->
+        <section aria-label="Key metrics" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-gutter-md items-stretch">
+          <!-- KPI 1: Total Cases -->
+          <a href="#recent-cases" class="group h-full rounded-lg border border-light-outline-variant dark:border-dark-outline-variant bg-gradient-to-br from-light-surface-container-lowest via-light-surface-container-lowest to-light-surface-container-low dark:from-dark-surface-container-low dark:to-dark-surface-container p-gutter-md shadow-sm hover:border-light-primary dark:hover:border-dark-primary transition-colors duration-state-change ease-state-change flex flex-col justify-between gap-gutter-md">
+            <header class="flex items-center justify-between gap-gutter-sm">
+              <h3 class="font-title text-title-sm text-light-on-surface-variant dark:text-dark-on-surface-variant whitespace-nowrap" data-design-text-token="title-sm">Total cases</h3>
+              <span class="w-9 h-9 rounded-md bg-light-surface-container dark:bg-dark-surface-container-high flex items-center justify-center text-light-primary dark:text-dark-primary shrink-0">
+                <span class="material-symbols-outlined text-title-md" aria-hidden="true">folder_open</span>
+              </span>
+            </header>
+            <div class="flex items-center justify-between gap-gutter-sm">
+              <p id="kpi-total-cases" class="font-display text-display-md text-light-on-surface dark:text-dark-on-surface tabular-nums" data-design-text-token="display-md">3</p>
+              <span class="font-label text-label-md text-light-secondary dark:text-dark-secondary" data-design-text-token="label-md">3 completed</span>
+            </div>
+          </a>
+
+          <!-- KPI 2: Images Uploaded -->
+          <a href="#recent-activity" class="group h-full rounded-lg border border-light-outline-variant dark:border-dark-outline-variant bg-gradient-to-br from-light-surface-container-lowest via-light-surface-container-lowest to-light-secondary-container/30 dark:from-dark-surface-container-low dark:to-dark-secondary-container/20 p-gutter-md shadow-sm hover:border-light-secondary dark:hover:border-dark-secondary transition-colors duration-state-change ease-state-change flex flex-col justify-between gap-gutter-md">
+            <header class="flex items-center justify-between gap-gutter-sm">
+              <h3 class="font-title text-title-sm text-light-on-surface-variant dark:text-dark-on-surface-variant whitespace-nowrap" data-design-text-token="title-sm">Images uploaded</h3>
+              <span class="w-9 h-9 rounded-md bg-light-secondary-container dark:bg-dark-secondary-container flex items-center justify-center text-light-on-secondary-container dark:text-dark-on-secondary-container shrink-0">
+                <span class="material-symbols-outlined text-title-md" aria-hidden="true">image</span>
+              </span>
+            </header>
+            <div class="flex items-center justify-between gap-gutter-sm">
+              <p id="kpi-images-uploaded" class="font-display text-display-md text-light-on-surface dark:text-dark-on-surface tabular-nums" data-design-text-token="display-md">6</p>
+              <span class="font-label text-label-md text-light-on-surface-variant dark:text-dark-on-surface-variant" data-design-text-token="label-md">Angiogram frames</span>
+            </div>
+          </a>
+
+          <!-- KPI 3: Analyses Completed -->
+          <a href="#recent-analyses" class="group h-full rounded-lg border border-light-outline-variant dark:border-dark-outline-variant bg-gradient-to-br from-light-surface-container-lowest via-light-surface-container-lowest to-light-surface-container dark:from-dark-surface-container-low dark:to-dark-surface-container p-gutter-md shadow-sm hover:border-light-primary dark:hover:border-dark-primary transition-colors duration-state-change ease-state-change flex flex-col justify-between gap-gutter-md">
+            <header class="flex items-center justify-between gap-gutter-sm">
+              <h3 class="font-title text-title-sm text-light-on-surface-variant dark:text-dark-on-surface-variant whitespace-nowrap" data-design-text-token="title-sm">Analyses completed</h3>
+              <span class="w-9 h-9 rounded-md bg-light-surface-container dark:bg-dark-surface-container-high flex items-center justify-center text-light-secondary dark:text-dark-secondary shrink-0">
+                <span class="material-symbols-outlined text-title-md" aria-hidden="true">task_alt</span>
+              </span>
+            </header>
+            <div class="flex items-center justify-between gap-gutter-sm">
+              <p id="kpi-analyses-completed" class="font-display text-display-md text-light-on-surface dark:text-dark-on-surface tabular-nums" data-design-text-token="display-md">5</p>
+              <span class="font-label text-label-md text-light-secondary dark:text-dark-secondary" data-design-text-token="label-md">Saved runs</span>
+            </div>
+          </a>
+
+          <!-- KPI 4: Analyses In Progress -->
+          <a href="#analysis-status" class="group h-full rounded-lg border border-light-outline-variant dark:border-dark-outline-variant bg-gradient-to-br from-light-surface-container-lowest via-light-surface-container-lowest to-light-surface-variant/40 dark:from-dark-surface-container-low dark:to-dark-surface-container-high/60 p-gutter-md shadow-sm hover:border-light-tertiary dark:hover:border-dark-tertiary transition-colors duration-state-change ease-state-change flex flex-col justify-between gap-gutter-md">
+            <header class="flex items-center justify-between gap-gutter-sm">
+              <h3 class="font-title text-title-sm text-light-on-surface-variant dark:text-dark-on-surface-variant whitespace-nowrap" data-design-text-token="title-sm">Analyses in progress</h3>
+              <span class="w-9 h-9 rounded-md bg-light-surface-container dark:bg-dark-surface-container-high flex items-center justify-center text-light-tertiary dark:text-dark-tertiary shrink-0">
+                <span class="material-symbols-outlined text-title-md" aria-hidden="true">ecg_heart</span>
+              </span>
+            </header>
+            <div class="flex items-center justify-between gap-gutter-sm">
+              <p id="kpi-analyses-progress" class="font-display text-display-md text-light-on-surface dark:text-dark-on-surface tabular-nums" data-design-text-token="display-md">0</p>
+              <span class="font-label text-label-md text-light-on-surface-variant dark:text-dark-on-surface-variant" data-design-text-token="label-md">Queue idle</span>
+            </div>
+          </a>
+        </section>
+
+        <!-- Row 2: Analysis Status + Recent Activity + Quick Actions (3 balanced columns on lg) -->
+        <section class="grid grid-cols-1 lg:grid-cols-3 gap-gutter-md items-stretch">
+
+          <!-- Analysis Status Card -->
+          <article id="analysis-status" class="h-full rounded-lg border border-light-outline-variant dark:border-dark-outline-variant bg-light-surface-container-lowest dark:bg-dark-surface-container-low p-gutter-lg shadow-sm flex flex-col justify-between gap-gutter-md">
+            <header class="flex items-center justify-between gap-gutter-sm">
+              <div>
+                <h3 class="font-headline text-headline-sm text-light-on-surface dark:text-dark-on-surface" data-design-text-token="headline-sm">Analysis status</h3>
+                <p class="text-body-sm text-light-on-surface-variant dark:text-dark-on-surface-variant" data-design-text-token="body-sm">Case completion breakdown</p>
+              </div>
+              <span class="px-gutter-sm py-gutter-xs rounded-full bg-light-secondary-container text-light-on-secondary-container dark:bg-dark-secondary-container dark:text-dark-on-secondary-container font-label text-label-sm whitespace-nowrap shrink-0" data-design-text-token="label-sm">Complete</span>
+            </header>
+
+            <!-- Interactive Donut Visualization & Legend -->
+            <div class="flex flex-col sm:flex-row lg:flex-col xl:flex-row items-center justify-center gap-gutter-md py-gutter-sm">
+              <div class="relative w-36 h-36 shrink-0 flex items-center justify-center">
+                <svg viewBox="0 0 160 160" class="w-36 h-36 -rotate-90" role="img" aria-label="Analysis status donut chart showing 3 completed cases out of 3 total cases">
+                  <circle cx="80" cy="80" r="60" fill="none" stroke="currentColor" stroke-width="18" class="text-light-surface-container-high dark:text-dark-surface-container-high"></circle>
+                  <!-- Completed segment (100% = 377) -->
+                  <circle id="donut-completed" cx="80" cy="80" r="60" fill="none" stroke="currentColor" stroke-width="18" stroke-dasharray="377 377" stroke-linecap="round" class="text-light-secondary dark:text-dark-secondary transition-opacity duration-state-change ease-state-change hover:opacity-85 cursor-pointer" style="transform-box: fill-box; transform-origin: center;"></circle>
+                </svg>
+                <div class="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none">
+                  <span id="donut-center-count" class="font-display text-display-md text-light-on-surface dark:text-dark-on-surface tabular-nums leading-none" data-design-text-token="display-md">3</span>
+                  <span id="donut-center-label" class="font-label text-label-md text-light-on-surface-variant dark:text-dark-on-surface-variant mt-gutter-xs" data-design-text-token="label-md">Cases</span>
+                </div>
+              </div>
+
+              <ul class="w-full flex flex-col gap-gutter-xs">
+                <li class="flex items-center justify-between gap-gutter-sm px-gutter-sm py-gutter-xs rounded hover:bg-light-surface-container-low dark:hover:bg-dark-surface-container transition-colors duration-state-change cursor-pointer status-legend-item" data-count="3" data-label="Completed">
+                  <span class="flex items-center gap-gutter-sm">
+                    <span class="w-2.5 h-2.5 rounded-full bg-light-secondary dark:bg-dark-secondary shrink-0" aria-hidden="true"></span>
+                    <span class="text-body-md text-light-on-surface dark:text-dark-on-surface" data-design-text-token="body-md">Completed</span>
+                  </span>
+                  <span class="font-title text-title-sm text-light-on-surface dark:text-dark-on-surface tabular-nums" data-design-text-token="title-sm">3</span>
+                </li>
+                <li class="flex items-center justify-between gap-gutter-sm px-gutter-sm py-gutter-xs rounded hover:bg-light-surface-container-low dark:hover:bg-dark-surface-container transition-colors duration-state-change cursor-pointer status-legend-item" data-count="0" data-label="In progress">
+                  <span class="flex items-center gap-gutter-sm">
+                    <span class="w-2.5 h-2.5 rounded-full bg-light-primary dark:bg-dark-primary shrink-0" aria-hidden="true"></span>
+                    <span class="text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant" data-design-text-token="body-md">In progress</span>
+                  </span>
+                  <span class="font-title text-title-sm text-light-on-surface-variant dark:text-dark-on-surface-variant tabular-nums" data-design-text-token="title-sm">0</span>
+                </li>
+                <li class="flex items-center justify-between gap-gutter-sm px-gutter-sm py-gutter-xs rounded hover:bg-light-surface-container-low dark:hover:bg-dark-surface-container transition-colors duration-state-change cursor-pointer status-legend-item" data-count="0" data-label="Failed">
+                  <span class="flex items-center gap-gutter-sm">
+                    <span class="w-2.5 h-2.5 rounded-full bg-light-error dark:bg-dark-error shrink-0" aria-hidden="true"></span>
+                    <span class="text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant" data-design-text-token="body-md">Failed</span>
+                  </span>
+                  <span class="font-title text-title-sm text-light-on-surface-variant dark:text-dark-on-surface-variant tabular-nums" data-design-text-token="title-sm">0</span>
+                </li>
+                <li class="flex items-center justify-between gap-gutter-sm px-gutter-sm py-gutter-xs rounded hover:bg-light-surface-container-low dark:hover:bg-dark-surface-container transition-colors duration-state-change cursor-pointer status-legend-item" data-count="0" data-label="Pending">
+                  <span class="flex items-center gap-gutter-sm">
+                    <span class="w-2.5 h-2.5 rounded-full bg-light-outline dark:bg-dark-outline shrink-0" aria-hidden="true"></span>
+                    <span class="text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant" data-design-text-token="body-md">Pending</span>
+                  </span>
+                  <span class="font-title text-title-sm text-light-on-surface-variant dark:text-dark-on-surface-variant tabular-nums" data-design-text-token="title-sm">0</span>
+                </li>
+              </ul>
+            </div>
+
+            <p class="text-body-sm text-light-on-surface-variant dark:text-dark-on-surface-variant border-t border-light-outline-variant dark:border-dark-outline-variant pt-gutter-sm" data-design-text-token="body-sm">
+              Each case is counted once; completed status takes precedence.
+            </p>
+          </article>
+
+          <!-- Recent Activity Card -->
+          <article id="recent-activity" class="h-full rounded-lg border border-light-outline-variant dark:border-dark-outline-variant bg-light-surface-container-lowest dark:bg-dark-surface-container-low p-gutter-lg shadow-sm flex flex-col gap-gutter-md">
+            <header class="flex flex-wrap items-center justify-between gap-gutter-sm">
+              <div>
+                <h3 class="font-headline text-headline-sm text-light-on-surface dark:text-dark-on-surface" data-design-text-token="headline-sm">Recent activity</h3>
+                <p class="text-body-sm text-light-on-surface-variant dark:text-dark-on-surface-variant" data-design-text-token="body-sm">Latest pipeline events</p>
+              </div>
+              <div class="flex items-center gap-gutter-xs" role="tablist" aria-label="Filter recent activity">
+                <button type="button" role="tab" aria-selected="true" data-filter="all" class="activity-filter-btn px-gutter-sm py-gutter-xs rounded font-label text-label-sm bg-light-primary text-light-on-primary dark:bg-dark-primary-container dark:text-dark-on-primary-container transition-colors duration-state-change">All</button>
+                <button type="button" role="tab" aria-selected="false" data-filter="analysis" class="activity-filter-btn px-gutter-sm py-gutter-xs rounded font-label text-label-sm text-light-on-surface-variant dark:text-dark-on-surface-variant hover:bg-light-surface-container-low dark:hover:bg-dark-surface-container transition-colors duration-state-change">Analyses</button>
+                <button type="button" role="tab" aria-selected="false" data-filter="upload" class="activity-filter-btn px-gutter-sm py-gutter-xs rounded font-label text-label-sm text-light-on-surface-variant dark:text-dark-on-surface-variant hover:bg-light-surface-container-low dark:hover:bg-dark-surface-container transition-colors duration-state-change">Uploads</button>
+              </div>
+            </header>
+
+            <ul id="activity-list" class="divide-y divide-light-outline-variant dark:divide-dark-outline-variant flex-1">
+              <li data-activity-type="analysis" class="py-gutter-sm flex items-center justify-between gap-gutter-sm hover:bg-light-surface-container-low dark:hover:bg-dark-surface-container px-gutter-sm -mx-gutter-sm rounded-md transition-colors duration-state-change">
+                <div class="flex items-center gap-gutter-sm min-w-0">
+                  <span class="w-8 h-8 rounded-md bg-light-surface-container dark:bg-dark-surface-container-high flex items-center justify-center text-light-tertiary dark:text-dark-tertiary shrink-0">
+                    <span class="material-symbols-outlined text-title-md" aria-hidden="true">ecg_heart</span>
+                  </span>
+                  <div class="flex flex-col min-w-0">
+                    <span class="font-title text-title-sm text-light-on-surface dark:text-dark-on-surface truncate" data-design-text-token="title-sm">Analysis completed</span>
+                    <span class="font-mono text-mono-sm text-light-on-surface-variant dark:text-dark-on-surface-variant truncate" data-design-text-token="mono-sm">pt2case_01 · 43fb4985</span>
+                  </div>
+                </div>
+                <span class="text-body-sm text-light-on-surface-variant dark:text-dark-on-surface-variant tabular-nums shrink-0" data-design-text-token="body-sm">4:49 PM</span>
+              </li>
+
+              <li data-activity-type="upload" class="py-gutter-sm flex items-center justify-between gap-gutter-sm hover:bg-light-surface-container-low dark:hover:bg-dark-surface-container px-gutter-sm -mx-gutter-sm rounded-md transition-colors duration-state-change">
+                <div class="flex items-center gap-gutter-sm min-w-0">
+                  <span class="w-8 h-8 rounded-md bg-light-secondary-container dark:bg-dark-secondary-container flex items-center justify-center text-light-on-secondary-container dark:text-dark-on-secondary-container shrink-0">
+                    <span class="material-symbols-outlined text-title-md" aria-hidden="true">image</span>
+                  </span>
+                  <div class="flex flex-col min-w-0">
+                    <span class="font-title text-title-sm text-light-on-surface dark:text-dark-on-surface truncate" data-design-text-token="title-sm">Image uploaded</span>
+                    <span class="font-mono text-mono-sm text-light-on-surface-variant dark:text-dark-on-surface-variant truncate" data-design-text-token="mono-sm">33.png · pt2case_01</span>
+                  </div>
+                </div>
+                <span class="text-body-sm text-light-on-surface-variant dark:text-dark-on-surface-variant tabular-nums shrink-0" data-design-text-token="body-sm">4:49 PM</span>
+              </li>
+
+              <li data-activity-type="analysis" class="py-gutter-sm flex items-center justify-between gap-gutter-sm hover:bg-light-surface-container-low dark:hover:bg-dark-surface-container px-gutter-sm -mx-gutter-sm rounded-md transition-colors duration-state-change">
+                <div class="flex items-center gap-gutter-sm min-w-0">
+                  <span class="w-8 h-8 rounded-md bg-light-surface-container dark:bg-dark-surface-container-high flex items-center justify-center text-light-tertiary dark:text-dark-tertiary shrink-0">
+                    <span class="material-symbols-outlined text-title-md" aria-hidden="true">ecg_heart</span>
+                  </span>
+                  <div class="flex flex-col min-w-0">
+                    <span class="font-title text-title-sm text-light-on-surface dark:text-dark-on-surface truncate" data-design-text-token="title-sm">Analysis completed</span>
+                    <span class="font-mono text-mono-sm text-light-on-surface-variant dark:text-dark-on-surface-variant truncate" data-design-text-token="mono-sm">pt2case_01 · 6a913cd2</span>
+                  </div>
+                </div>
+                <span class="text-body-sm text-light-on-surface-variant dark:text-dark-on-surface-variant tabular-nums shrink-0" data-design-text-token="body-sm">4:48 PM</span>
+              </li>
+
+              <li data-activity-type="upload" class="py-gutter-sm flex items-center justify-between gap-gutter-sm hover:bg-light-surface-container-low dark:hover:bg-dark-surface-container px-gutter-sm -mx-gutter-sm rounded-md transition-colors duration-state-change">
+                <div class="flex items-center gap-gutter-sm min-w-0">
+                  <span class="w-8 h-8 rounded-md bg-light-secondary-container dark:bg-dark-secondary-container flex items-center justify-center text-light-on-secondary-container dark:text-dark-on-secondary-container shrink-0">
+                    <span class="material-symbols-outlined text-title-md" aria-hidden="true">image</span>
+                  </span>
+                  <div class="flex flex-col min-w-0">
+                    <span class="font-title text-title-sm text-light-on-surface dark:text-dark-on-surface truncate" data-design-text-token="title-sm">Image uploaded</span>
+                    <span class="font-mono text-mono-sm text-light-on-surface-variant dark:text-dark-on-surface-variant truncate" data-design-text-token="mono-sm">30.png · pt2case_01</span>
+                  </div>
+                </div>
+                <span class="text-body-sm text-light-on-surface-variant dark:text-dark-on-surface-variant tabular-nums shrink-0" data-design-text-token="body-sm">4:47 PM</span>
+              </li>
+
+              <li data-activity-type="analysis" class="py-gutter-sm flex items-center justify-between gap-gutter-sm hover:bg-light-surface-container-low dark:hover:bg-dark-surface-container px-gutter-sm -mx-gutter-sm rounded-md transition-colors duration-state-change">
+                <div class="flex items-center gap-gutter-sm min-w-0">
+                  <span class="w-8 h-8 rounded-md bg-light-surface-container dark:bg-dark-surface-container-high flex items-center justify-center text-light-tertiary dark:text-dark-tertiary shrink-0">
+                    <span class="material-symbols-outlined text-title-md" aria-hidden="true">ecg_heart</span>
+                  </span>
+                  <div class="flex flex-col min-w-0">
+                    <span class="font-title text-title-sm text-light-on-surface dark:text-dark-on-surface truncate" data-design-text-token="title-sm">Analysis completed</span>
+                    <span class="font-mono text-mono-sm text-light-on-surface-variant dark:text-dark-on-surface-variant truncate" data-design-text-token="mono-sm">pt2case_01 · 43866f42</span>
+                  </div>
+                </div>
+                <span class="text-body-sm text-light-on-surface-variant dark:text-dark-on-surface-variant tabular-nums shrink-0" data-design-text-token="body-sm">4:41 PM</span>
+              </li>
+            </ul>
+
+            <footer class="pt-gutter-sm border-t border-light-outline-variant dark:border-dark-outline-variant flex items-center justify-between">
+              <span class="text-body-sm text-light-on-surface-variant dark:text-dark-on-surface-variant" data-design-text-token="body-sm">Nov 23, 2026</span>
+              <button type="button" class="nav-toast-link inline-flex items-center gap-gutter-xs font-label text-label-md text-light-primary dark:text-dark-primary hover:underline">
+                <span data-design-text-token="label-md">View all</span>
+                <span class="material-symbols-outlined text-title-sm" aria-hidden="true">arrow_forward</span>
+              </button>
+            </footer>
+          </article>
+
+          <!-- Quick Actions Card -->
+          <article id="quick-actions" class="h-full rounded-lg border border-light-outline-variant dark:border-dark-outline-variant bg-light-surface-container-lowest dark:bg-dark-surface-container-low p-gutter-lg shadow-sm flex flex-col justify-between gap-gutter-md">
+            <header>
+              <h3 class="font-headline text-headline-sm text-light-on-surface dark:text-dark-on-surface" data-design-text-token="headline-sm">Quick actions</h3>
+              <p class="text-body-sm text-light-on-surface-variant dark:text-dark-on-surface-variant" data-design-text-token="body-sm">Launch research workflows</p>
+            </header>
+
+            <div class="flex flex-col gap-gutter-sm flex-1">
+              <button id="qa-create-case" type="button" class="w-full inline-flex items-center justify-between gap-gutter-sm px-gutter-md py-gutter-sm rounded-md bg-light-primary text-light-on-primary hover:bg-light-primary-container dark:bg-dark-primary-container dark:text-dark-on-primary-container font-label text-label-lg transition-colors duration-state-change ease-state-change shadow-sm whitespace-nowrap">
+                <span class="flex items-center gap-gutter-sm">
+                  <span class="material-symbols-outlined text-headline-sm shrink-0" aria-hidden="true">add</span>
+                  <span data-design-text-token="label-lg">Create new case</span>
+                </span>
+                <span class="material-symbols-outlined text-title-md shrink-0" aria-hidden="true">chevron_right</span>
+              </button>
+
+              <button id="qa-upload-images" data-component-id="button-with-icon" data-component-type="button" data-component-variant="with-icon" type="button" class="w-full inline-flex items-center justify-between gap-gutter-sm px-gutter-md py-gutter-sm rounded-md border border-light-outline-variant dark:border-dark-outline-variant bg-light-surface-container-lowest dark:bg-dark-surface-container text-light-on-surface dark:text-dark-on-surface hover:bg-light-surface-container-low dark:hover:bg-dark-surface-container-high font-label text-label-lg transition-colors duration-state-change ease-state-change whitespace-nowrap">
+                <span class="flex items-center gap-gutter-sm">
+                  <span class="material-symbols-outlined text-headline-sm text-light-secondary dark:text-dark-secondary shrink-0" aria-hidden="true">upload_file</span>
+                  <span data-design-text-token="label-lg">Upload images</span>
+                </span>
+                <span class="material-symbols-outlined text-title-md text-light-on-surface-variant dark:text-dark-on-surface-variant shrink-0" aria-hidden="true">chevron_right</span>
+              </button>
+
+              <button id="qa-start-analysis" data-component-id="button-with-icon" data-component-type="button" data-component-variant="with-icon" type="button" class="w-full inline-flex items-center justify-between gap-gutter-sm px-gutter-md py-gutter-sm rounded-md border border-light-outline-variant dark:border-dark-outline-variant bg-light-surface-container-lowest dark:bg-dark-surface-container text-light-on-surface dark:text-dark-on-surface hover:bg-light-surface-container-low dark:hover:bg-dark-surface-container-high font-label text-label-lg transition-colors duration-state-change ease-state-change whitespace-nowrap">
+                <span class="flex items-center gap-gutter-sm">
+                  <span class="material-symbols-outlined text-headline-sm text-light-tertiary dark:text-dark-tertiary shrink-0" aria-hidden="true">ecg_heart</span>
+                  <span data-design-text-token="label-lg">Start analysis</span>
+                </span>
+                <span class="material-symbols-outlined text-title-md text-light-on-surface-variant dark:text-dark-on-surface-variant shrink-0" aria-hidden="true">chevron_right</span>
+              </button>
+
+              <button id="qa-view-reports" data-component-id="button-with-icon" data-component-type="button" data-component-variant="with-icon" type="button" class="w-full inline-flex items-center justify-between gap-gutter-sm px-gutter-md py-gutter-sm rounded-md border border-light-outline-variant dark:border-dark-outline-variant bg-light-surface-container-lowest dark:bg-dark-surface-container text-light-on-surface dark:text-dark-on-surface hover:bg-light-surface-container-low dark:hover:bg-dark-surface-container-high font-label text-label-lg transition-colors duration-state-change ease-state-change whitespace-nowrap">
+                <span class="flex items-center gap-gutter-sm">
+                  <span class="material-symbols-outlined text-headline-sm text-light-primary dark:text-dark-primary shrink-0" aria-hidden="true">description</span>
+                  <span data-design-text-token="label-lg">View reports</span>
+                </span>
+                <span class="material-symbols-outlined text-title-md text-light-on-surface-variant dark:text-dark-on-surface-variant shrink-0" aria-hidden="true">chevron_right</span>
+              </button>
+            </div>
+
+            <div class="rounded-md bg-light-surface-container-low dark:bg-dark-surface-container p-gutter-sm text-body-sm text-light-on-surface-variant dark:text-dark-on-surface-variant">
+              <span data-design-text-token="body-sm">Select any case below to inspect linked image IDs.</span>
+            </div>
+          </article>
+        </section>
+
+        <!-- Row 3: Recent Cases + Recent Analyses -->
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-md items-stretch">
+
+          <!-- Recent Cases (7 cols) -->
+          <article id="recent-cases" class="lg:col-span-7 h-full rounded-lg border border-light-outline-variant dark:border-dark-outline-variant bg-light-surface-container-lowest dark:bg-dark-surface-container-low p-gutter-lg shadow-sm flex flex-col gap-gutter-md">
+            <header class="flex flex-wrap items-center justify-between gap-gutter-sm">
+              <div>
+                <h3 class="font-headline text-headline-sm text-light-on-surface dark:text-dark-on-surface" data-design-text-token="headline-sm">Recent cases</h3>
+                <p class="text-body-sm text-light-on-surface-variant dark:text-dark-on-surface-variant" data-design-text-token="body-sm">Registered study cases</p>
+              </div>
+              <div class="flex items-center gap-gutter-sm">
+                <div class="relative">
+                  <span class="material-symbols-outlined text-title-md text-light-outline dark:text-dark-outline absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" aria-hidden="true">search</span>
+                  <input id="case-search" type="search" placeholder="Filter cases..." aria-label="Filter recent cases" class="pl-8 pr-gutter-sm py-gutter-xs rounded-md border border-light-outline-variant dark:border-dark-outline-variant bg-light-surface-container-low dark:bg-dark-surface-container text-body-sm text-light-on-surface dark:text-dark-on-surface placeholder:text-light-outline dark:placeholder:text-dark-outline focus:border-light-primary dark:focus:border-dark-primary focus:ring-0">
+                </div>
+                <button type="button" class="nav-toast-link inline-flex items-center gap-gutter-xs font-label text-label-md text-light-primary dark:text-dark-primary hover:underline whitespace-nowrap">
+                  <span data-design-text-token="label-md">View all</span>
+                  <span class="material-symbols-outlined text-title-sm" aria-hidden="true">arrow_forward</span>
+                </button>
+              </div>
+            </header>
+
+            <ul id="cases-list" class="divide-y divide-light-outline-variant dark:divide-dark-outline-variant flex-1">
+              <li class="case-row py-gutter-md flex flex-col sm:flex-row sm:items-center justify-between gap-gutter-sm hover:bg-light-surface-container-low dark:hover:bg-dark-surface-container px-gutter-sm -mx-gutter-sm rounded-md transition-colors duration-state-change cursor-pointer" data-case-id="pt2case_01" data-patient-id="Patient_02" data-date="Nov 14, 2026" data-images="43fb4985, 6a913cd2, 43866f42, 33.png, 30.png">
+                <div class="flex items-center gap-gutter-md min-w-0">
+                  <span class="w-10 h-10 rounded-md bg-light-surface-container dark:bg-dark-surface-container-high flex items-center justify-center text-light-primary dark:text-dark-primary shrink-0">
+                    <span class="material-symbols-outlined text-headline-sm" aria-hidden="true">folder</span>
+                  </span>
+                  <div class="flex flex-col min-w-0">
+                    <span class="font-mono text-title-sm text-light-on-surface dark:text-dark-on-surface truncate" data-design-text-token="title-sm">pt2case_01</span>
+                    <span class="text-body-sm text-light-on-surface-variant dark:text-dark-on-surface-variant truncate" data-design-text-token="body-sm">Patient_02</span>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between sm:justify-end gap-gutter-md shrink-0 pl-12 sm:pl-0">
+                  <span class="text-body-sm text-light-on-surface-variant dark:text-dark-on-surface-variant tabular-nums" data-design-text-token="body-sm">Nov 14, 2026</span>
+                  <span data-component-id="badge-success" data-component-type="badge" data-component-variant="success" role="status" class="inline-flex items-center gap-gutter-xs px-gutter-sm py-gutter-xs rounded-full bg-light-secondary-container text-light-on-secondary-container dark:bg-dark-secondary-container dark:text-dark-on-secondary-container font-label text-label-md">
+                    <span class="w-1.5 h-1.5 rounded-full bg-light-secondary dark:bg-dark-secondary" aria-hidden="true"></span>
+                    <span data-design-text-token="label-md">Completed</span>
+                  </span>
+                  <span class="material-symbols-outlined text-title-md text-light-outline dark:text-dark-outline hidden sm:inline-block" aria-hidden="true">chevron_right</span>
+                </div>
+              </li>
+
+              <li class="case-row py-gutter-md flex flex-col sm:flex-row sm:items-center justify-between gap-gutter-sm hover:bg-light-surface-container-low dark:hover:bg-dark-surface-container px-gutter-sm -mx-gutter-sm rounded-md transition-colors duration-state-change cursor-pointer" data-case-id="Case_01" data-patient-id="Patient_01" data-date="Nov 14, 2026" data-images="ad1f145e">
+                <div class="flex items-center gap-gutter-md min-w-0">
+                  <span class="w-10 h-10 rounded-md bg-light-surface-container dark:bg-dark-surface-container-high flex items-center justify-center text-light-primary dark:text-dark-primary shrink-0">
+                    <span class="material-symbols-outlined text-headline-sm" aria-hidden="true">folder</span>
+                  </span>
+                  <div class="flex flex-col min-w-0">
+                    <span class="font-mono text-title-sm text-light-on-surface dark:text-dark-on-surface truncate" data-design-text-token="title-sm">Case_01</span>
+                    <span class="text-body-sm text-light-on-surface-variant dark:text-dark-on-surface-variant truncate" data-design-text-token="body-sm">Patient_01</span>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between sm:justify-end gap-gutter-md shrink-0 pl-12 sm:pl-0">
+                  <span class="text-body-sm text-light-on-surface-variant dark:text-dark-on-surface-variant tabular-nums" data-design-text-token="body-sm">Nov 14, 2026</span>
+                  <span data-component-id="badge-success" data-component-type="badge" data-component-variant="success" role="status" class="inline-flex items-center gap-gutter-xs px-gutter-sm py-gutter-xs rounded-full bg-light-secondary-container text-light-on-secondary-container dark:bg-dark-secondary-container dark:text-dark-on-secondary-container font-label text-label-md">
+                    <span class="w-1.5 h-1.5 rounded-full bg-light-secondary dark:bg-dark-secondary" aria-hidden="true"></span>
+                    <span data-design-text-token="label-md">Completed</span>
+                  </span>
+                  <span class="material-symbols-outlined text-title-md text-light-outline dark:text-dark-outline hidden sm:inline-block" aria-hidden="true">chevron_right</span>
+                </div>
+              </li>
+
+              <li class="case-row py-gutter-md flex flex-col sm:flex-row sm:items-center justify-between gap-gutter-sm hover:bg-light-surface-container-low dark:hover:bg-dark-surface-container px-gutter-sm -mx-gutter-sm rounded-md transition-colors duration-state-change cursor-pointer" data-case-id="TEST-CASE-001" data-patient-id="TEST-PATIENT-001" data-date="Oct 25, 2026" data-images="No saved image runs">
+                <div class="flex items-center gap-gutter-md min-w-0">
+                  <span class="w-10 h-10 rounded-md bg-light-surface-container dark:bg-dark-surface-container-high flex items-center justify-center text-light-primary dark:text-dark-primary shrink-0">
+                    <span class="material-symbols-outlined text-headline-sm" aria-hidden="true">folder</span>
+                  </span>
+                  <div class="flex flex-col min-w-0">
+                    <span class="font-mono text-title-sm text-light-on-surface dark:text-dark-on-surface truncate" data-design-text-token="title-sm">TEST-CASE-001</span>
+                    <span class="text-body-sm text-light-on-surface-variant dark:text-dark-on-surface-variant truncate" data-design-text-token="body-sm">TEST-PATIENT-001</span>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between sm:justify-end gap-gutter-md shrink-0 pl-12 sm:pl-0">
+                  <span class="text-body-sm text-light-on-surface-variant dark:text-dark-on-surface-variant tabular-nums" data-design-text-token="body-sm">Oct 25, 2026</span>
+                  <span data-component-id="badge-success" data-component-type="badge" data-component-variant="success" role="status" class="inline-flex items-center gap-gutter-xs px-gutter-sm py-gutter-xs rounded-full bg-light-secondary-container text-light-on-secondary-container dark:bg-dark-secondary-container dark:text-dark-on-secondary-container font-label text-label-md">
+                    <span class="w-1.5 h-1.5 rounded-full bg-light-secondary dark:bg-dark-secondary" aria-hidden="true"></span>
+                    <span data-design-text-token="label-md">Completed</span>
+                  </span>
+                  <span class="material-symbols-outlined text-title-md text-light-outline dark:text-dark-outline hidden sm:inline-block" aria-hidden="true">chevron_right</span>
+                </div>
+              </li>
+            </ul>
+          </article>
+
+          <!-- Recent Analyses (5 cols) -->
+          <article id="recent-analyses" class="lg:col-span-5 h-full rounded-lg border border-light-outline-variant dark:border-dark-outline-variant bg-light-surface-container-lowest dark:bg-dark-surface-container-low p-gutter-lg shadow-sm flex flex-col gap-gutter-md">
+            <header class="flex items-center justify-between gap-gutter-sm">
+              <div>
+                <h3 class="font-headline text-headline-sm text-light-on-surface dark:text-dark-on-surface" data-design-text-token="headline-sm">Recent analyses</h3>
+                <p class="text-body-sm text-light-on-surface-variant dark:text-dark-on-surface-variant" data-design-text-token="body-sm">Latest saved runs</p>
+              </div>
+              <span class="font-label text-label-md text-light-on-surface-variant dark:text-dark-on-surface-variant tabular-nums" data-design-text-token="label-md">5 runs</span>
+            </header>
+
+            <ul class="divide-y divide-light-outline-variant dark:divide-dark-outline-variant flex-1">
+              <li class="py-gutter-sm flex items-center justify-between gap-gutter-sm">
+                <div class="flex items-center gap-gutter-sm min-w-0">
+                  <span class="w-8 h-8 rounded-md bg-light-surface-container dark:bg-dark-surface-container-high flex items-center justify-center text-light-tertiary dark:text-dark-tertiary shrink-0">
+                    <span class="material-symbols-outlined text-title-md" aria-hidden="true">layers</span>
+                  </span>
+                  <div class="flex flex-col min-w-0">
+                    <span class="font-mono text-title-sm text-light-on-surface dark:text-dark-on-surface truncate" data-design-text-token="title-sm">pt2case_01</span>
+                    <span class="font-mono text-mono-sm text-light-on-surface-variant dark:text-dark-on-surface-variant truncate" data-design-text-token="mono-sm">Image 43fb4985</span>
+                  </div>
+                </div>
+                <span data-component-id="badge-success" data-component-type="badge" data-component-variant="success" role="status" class="inline-flex items-center gap-gutter-xs px-gutter-sm py-gutter-xs rounded-full bg-light-secondary-container text-light-on-secondary-container dark:bg-dark-secondary-container dark:text-dark-on-secondary-container font-label text-label-md shrink-0">
+                  <span class="w-1.5 h-1.5 rounded-full bg-light-secondary dark:bg-dark-secondary" aria-hidden="true"></span>
+                  <span data-design-text-token="label-md">Completed</span>
+                </span>
+              </li>
+
+              <li class="py-gutter-sm flex items-center justify-between gap-gutter-sm">
+                <div class="flex items-center gap-gutter-sm min-w-0">
+                  <span class="w-8 h-8 rounded-md bg-light-surface-container dark:bg-dark-surface-container-high flex items-center justify-center text-light-tertiary dark:text-dark-tertiary shrink-0">
+                    <span class="material-symbols-outlined text-title-md" aria-hidden="true">layers</span>
+                  </span>
+                  <div class="flex flex-col min-w-0">
+                    <span class="font-mono text-title-sm text-light-on-surface dark:text-dark-on-surface truncate" data-design-text-token="title-sm">pt2case_01</span>
+                    <span class="font-mono text-mono-sm text-light-on-surface-variant dark:text-dark-on-surface-variant truncate" data-design-text-token="mono-sm">Image 43fb4985</span>
+                  </div>
+                </div>
+                <span data-component-id="badge-success" data-component-type="badge" data-component-variant="success" role="status" class="inline-flex items-center gap-gutter-xs px-gutter-sm py-gutter-xs rounded-full bg-light-secondary-container text-light-on-secondary-container dark:bg-dark-secondary-container dark:text-dark-on-secondary-container font-label text-label-md shrink-0">
+                  <span class="w-1.5 h-1.5 rounded-full bg-light-secondary dark:bg-dark-secondary" aria-hidden="true"></span>
+                  <span data-design-text-token="label-md">Completed</span>
+                </span>
+              </li>
+
+              <li class="py-gutter-sm flex items-center justify-between gap-gutter-sm">
+                <div class="flex items-center gap-gutter-sm min-w-0">
+                  <span class="w-8 h-8 rounded-md bg-light-surface-container dark:bg-dark-surface-container-high flex items-center justify-center text-light-tertiary dark:text-dark-tertiary shrink-0">
+                    <span class="material-symbols-outlined text-title-md" aria-hidden="true">layers</span>
+                  </span>
+                  <div class="flex flex-col min-w-0">
+                    <span class="font-mono text-title-sm text-light-on-surface dark:text-dark-on-surface truncate" data-design-text-token="title-sm">pt2case_01</span>
+                    <span class="font-mono text-mono-sm text-light-on-surface-variant dark:text-dark-on-surface-variant truncate" data-design-text-token="mono-sm">Image 6a913cd2</span>
+                  </div>
+                </div>
+                <span data-component-id="badge-success" data-component-type="badge" data-component-variant="success" role="status" class="inline-flex items-center gap-gutter-xs px-gutter-sm py-gutter-xs rounded-full bg-light-secondary-container text-light-on-secondary-container dark:bg-dark-secondary-container dark:text-dark-on-secondary-container font-label text-label-md shrink-0">
+                  <span class="w-1.5 h-1.5 rounded-full bg-light-secondary dark:bg-dark-secondary" aria-hidden="true"></span>
+                  <span data-design-text-token="label-md">Completed</span>
+                </span>
+              </li>
+
+              <li class="py-gutter-sm flex items-center justify-between gap-gutter-sm">
+                <div class="flex items-center gap-gutter-sm min-w-0">
+                  <span class="w-8 h-8 rounded-md bg-light-surface-container dark:bg-dark-surface-container-high flex items-center justify-center text-light-tertiary dark:text-dark-tertiary shrink-0">
+                    <span class="material-symbols-outlined text-title-md" aria-hidden="true">layers</span>
+                  </span>
+                  <div class="flex flex-col min-w-0">
+                    <span class="font-mono text-title-sm text-light-on-surface dark:text-dark-on-surface truncate" data-design-text-token="title-sm">pt2case_01</span>
+                    <span class="font-mono text-mono-sm text-light-on-surface-variant dark:text-dark-on-surface-variant truncate" data-design-text-token="mono-sm">Image 43866f42</span>
+                  </div>
+                </div>
+                <span data-component-id="badge-success" data-component-type="badge" data-component-variant="success" role="status" class="inline-flex items-center gap-gutter-xs px-gutter-sm py-gutter-xs rounded-full bg-light-secondary-container text-light-on-secondary-container dark:bg-dark-secondary-container dark:text-dark-on-secondary-container font-label text-label-md shrink-0">
+                  <span class="w-1.5 h-1.5 rounded-full bg-light-secondary dark:bg-dark-secondary" aria-hidden="true"></span>
+                  <span data-design-text-token="label-md">Completed</span>
+                </span>
+              </li>
+
+              <li class="py-gutter-sm flex items-center justify-between gap-gutter-sm">
+                <div class="flex items-center gap-gutter-sm min-w-0">
+                  <span class="w-8 h-8 rounded-md bg-light-surface-container dark:bg-dark-surface-container-high flex items-center justify-center text-light-tertiary dark:text-dark-tertiary shrink-0">
+                    <span class="material-symbols-outlined text-title-md" aria-hidden="true">layers</span>
+                  </span>
+                  <div class="flex flex-col min-w-0">
+                    <span class="font-mono text-title-sm text-light-on-surface dark:text-dark-on-surface truncate" data-design-text-token="title-sm">Case_01</span>
+                    <span class="font-mono text-mono-sm text-light-on-surface-variant dark:text-dark-on-surface-variant truncate" data-design-text-token="mono-sm">Image ad1f145e</span>
+                  </div>
+                </div>
+                <span data-component-id="badge-success" data-component-type="badge" data-component-variant="success" role="status" class="inline-flex items-center gap-gutter-xs px-gutter-sm py-gutter-xs rounded-full bg-light-secondary-container text-light-on-secondary-container dark:bg-dark-secondary-container dark:text-dark-on-secondary-container font-label text-label-md shrink-0">
+                  <span class="w-1.5 h-1.5 rounded-full bg-light-secondary dark:bg-dark-secondary" aria-hidden="true"></span>
+                  <span data-design-text-token="label-md">Completed</span>
+                </span>
+              </li>
+            </ul>
+          </article>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Interactive Modal Overlay for Quick Actions / Case Inspection -->
+  <div id="modal-overlay" class="fixed inset-0 z-50 hidden items-center justify-center p-gutter-md bg-light-inverse-surface/50 dark:bg-dark-surface-dim/80" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="w-full max-w-md rounded-lg border border-light-outline-variant dark:border-dark-outline-variant bg-light-surface-container-lowest dark:bg-dark-surface-container-low p-gutter-lg shadow-xl flex flex-col gap-gutter-md">
+      <header class="flex items-center justify-between gap-gutter-sm">
+        <h3 id="modal-title" class="font-headline text-headline-sm text-light-on-surface dark:text-dark-on-surface" data-design-text-token="headline-sm">Case Details</h3>
+        <button id="modal-close-btn" type="button" aria-label="Close dialog" class="w-8 h-8 rounded flex items-center justify-center text-light-on-surface-variant dark:text-dark-on-surface-variant hover:bg-light-surface-container-low dark:hover:bg-dark-surface-container">
+          <span class="material-symbols-outlined text-title-md" aria-hidden="true">close</span>
+        </button>
+      </header>
+      <div id="modal-body" class="text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant flex flex-col gap-gutter-sm"></div>
+      <footer class="pt-gutter-sm border-t border-light-outline-variant dark:border-dark-outline-variant flex items-center justify-end gap-gutter-sm">
+        <button id="modal-cancel-btn" type="button" class="px-gutter-md py-gutter-sm rounded-md border border-light-outline-variant dark:border-dark-outline-variant text-light-on-surface dark:text-dark-on-surface hover:bg-light-surface-container-low dark:hover:bg-dark-surface-container font-label text-label-lg">
+          <span data-design-text-token="label-lg">Close</span>
+        </button>
+        <button id="modal-confirm-btn" type="button" class="px-gutter-md py-gutter-sm rounded-md bg-light-primary text-light-on-primary dark:bg-dark-primary-container dark:text-dark-on-primary-container font-label text-label-lg">
+          <span data-design-text-token="label-lg">Done</span>
+        </button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Toast Feedback -->
+  <div id="toast" class="fixed bottom-gutter-lg right-gutter-lg z-50 hidden items-center gap-gutter-sm px-gutter-md py-gutter-sm rounded-md bg-light-inverse-surface text-light-inverse-on-surface dark:bg-dark-inverse-surface dark:text-dark-inverse-on-surface shadow-lg font-label text-label-md" role="status" aria-live="polite">
+    <span class="material-symbols-outlined text-title-md" aria-hidden="true">info</span>
+    <span id="toast-message">Action triggered</span>
+  </div>
+
+  <script>
+    (function () {
+      const rootHtml = document.documentElement;
+      const sidebar = document.getElementById('sidebar');
+      const collapseBtn = document.getElementById('sidebar-collapse-btn');
+      const collapseIcon = document.getElementById('sidebar-collapse-icon');
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const mobileCloseBtn = document.getElementById('mobile-close-btn');
+      const mobileBackdrop = document.getElementById('mobile-backdrop');
+
+      const lightBtn = document.getElementById('theme-light-btn');
+      const darkBtn = document.getElementById('theme-dark-btn');
+
+      function setTheme(mode) {
+        if (mode === 'dark') {
+          rootHtml.classList.add('dark');
+        } else {
+          rootHtml.classList.remove('dark');
+        }
+        try {
+          localStorage.setItem('aas-theme', mode);
+        } catch (e) {}
+      }
+
+      try {
+        const saved = localStorage.getItem('aas-theme');
+        if (saved === 'dark') setTheme('dark');
+      } catch (e) {}
+
+      lightBtn.addEventListener('click', function () {
+        setTheme('light');
+        showToast('Switched to Light theme');
+      });
+
+      darkBtn.addEventListener('click', function () {
+        setTheme('dark');
+        showToast('Switched to Dark theme');
+      });
+
+      // Desktop sidebar collapse
+      if (collapseBtn) {
+        collapseBtn.addEventListener('click', function () {
+          const isCollapsed = sidebar.classList.toggle('sidebar-collapsed');
+          sidebar.classList.toggle('w-64', !isCollapsed);
+          sidebar.classList.toggle('w-20', isCollapsed);
+          collapseIcon.textContent = isCollapsed ? 'dock_to_right' : 'dock_to_left';
+          collapseBtn.setAttribute('aria-label', isCollapsed ? 'Expand sidebar' : 'Collapse sidebar');
+        });
+      }
+
+      // Mobile drawer toggle
+      function openMobileNav() {
+        sidebar.classList.remove('-translate-x-full');
+        mobileBackdrop.classList.remove('hidden');
+      }
+      function closeMobileNav() {
+        sidebar.classList.add('-translate-x-full');
+        mobileBackdrop.classList.add('hidden');
+      }
+      if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', openMobileNav);
+      if (mobileCloseBtn) mobileCloseBtn.addEventListener('click', closeMobileNav);
+      if (mobileBackdrop) mobileBackdrop.addEventListener('click', closeMobileNav);
+
+      // Donut legend hover/click interaction
+      const centerCount = document.getElementById('donut-center-count');
+      const centerLabel = document.getElementById('donut-center-label');
+      document.querySelectorAll('.status-legend-item').forEach(function (item) {
+        item.addEventListener('mouseenter', function () {
+          centerCount.textContent = item.getAttribute('data-count');
+          centerLabel.textContent = item.getAttribute('data-label');
+        });
+        item.addEventListener('mouseleave', function () {
+          centerCount.textContent = '3';
+          centerLabel.textContent = 'Cases';
+        });
+      });
+
+      // Activity filter tabs
+      const filterBtns = document.querySelectorAll('.activity-filter-btn');
+      const activityRows = document.querySelectorAll('#activity-list li');
+      filterBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          const filter = btn.getAttribute('data-filter');
+          filterBtns.forEach(function (b) {
+            const active = b === btn;
+            b.setAttribute('aria-selected', active ? 'true' : 'false');
+            b.className = active
+              ? 'activity-filter-btn px-gutter-sm py-gutter-xs rounded font-label text-label-sm bg-light-primary text-light-on-primary dark:bg-dark-primary-container dark:text-dark-on-primary-container transition-colors duration-state-change'
+              : 'activity-filter-btn px-gutter-sm py-gutter-xs rounded font-label text-label-sm text-light-on-surface-variant dark:text-dark-on-surface-variant hover:bg-light-surface-container-low dark:hover:bg-dark-surface-container transition-colors duration-state-change';
+          });
+          activityRows.forEach(function (row) {
+            const type = row.getAttribute('data-activity-type');
+            row.classList.toggle('hidden', filter !== 'all' && type !== filter);
+          });
+        });
+      });
+
+      // Case search filter
+      const caseSearch = document.getElementById('case-search');
+      const caseRows = document.querySelectorAll('.case-row');
+      if (caseSearch) {
+        caseSearch.addEventListener('input', function () {
+          const q = caseSearch.value.trim().toLowerCase();
+          caseRows.forEach(function (row) {
+            const text = (row.getAttribute('data-case-id') + ' ' + row.getAttribute('data-patient-id')).toLowerCase();
+            row.classList.toggle('hidden', q !== '' && !text.includes(q));
+          });
+        });
+      }
+
+      // Modal helper
+      const modalOverlay = document.getElementById('modal-overlay');
+      const modalTitle = document.getElementById('modal-title');
+      const modalBody = document.getElementById('modal-body');
+      const modalCloseBtn = document.getElementById('modal-close-btn');
+      const modalCancelBtn = document.getElementById('modal-cancel-btn');
+      const modalConfirmBtn = document.getElementById('modal-confirm-btn');
+
+      function openModal(title, htmlContent, confirmText) {
+        modalTitle.textContent = title;
+        modalBody.innerHTML = htmlContent;
+        modalConfirmBtn.querySelector('span').textContent = confirmText || 'Done';
+        modalOverlay.classList.remove('hidden');
+        modalOverlay.classList.add('flex');
+      }
+      function closeModal() {
+        modalOverlay.classList.add('hidden');
+        modalOverlay.classList.remove('flex');
+      }
+      modalCloseBtn.addEventListener('click', closeModal);
+      modalCancelBtn.addEventListener('click', closeModal);
+      modalConfirmBtn.addEventListener('click', function () {
+        closeModal();
+        showToast('Action saved');
+      });
+
+      // Case row inspection
+      caseRows.forEach(function (row) {
+        row.addEventListener('click', function () {
+          const cid = row.getAttribute('data-case-id');
+          const pid = row.getAttribute('data-patient-id');
+          const dt = row.getAttribute('data-date');
+          const imgs = row.getAttribute('data-images');
+          openModal(
+            'Case: ' + cid,
+            '<div class="flex flex-col gap-gutter-sm">' +
+              '<div class="flex justify-between py-gutter-xs border-b border-light-outline-variant dark:border-dark-outline-variant"><span>Patient ID</span><span class="font-mono text-light-on-surface dark:text-dark-on-surface">' + pid + '</span></div>' +
+              '<div class="flex justify-between py-gutter-xs border-b border-light-outline-variant dark:border-dark-outline-variant"><span>Created</span><span class="tabular-nums text-light-on-surface dark:text-dark-on-surface">' + dt + '</span></div>' +
+              '<div class="flex justify-between py-gutter-xs border-b border-light-outline-variant dark:border-dark-outline-variant"><span>Status</span><span class="text-light-secondary dark:text-dark-secondary font-label">Completed</span></div>' +
+              '<div class="pt-gutter-xs"><span class="block mb-gutter-xs">Linked Images</span><span class="font-mono text-mono-sm text-light-on-surface dark:text-dark-on-surface">' + imgs + '</span></div>' +
+            '</div>',
+            'Open Case'
+          );
+        });
+      });
+
+      // Quick Actions
+      function triggerCreateCase() {
+        openModal(
+          'Create new case',
+          '<label class="flex flex-col gap-gutter-xs"><span class="font-label text-label-md text-light-on-surface dark:text-dark-on-surface">Case Identifier</span><input type="text" placeholder="e.g. pt2case_02" class="rounded-md border border-light-outline-variant dark:border-dark-outline-variant bg-light-surface-container-low dark:bg-dark-surface-container text-body-md text-light-on-surface dark:text-dark-on-surface"></label>' +
+          '<label class="flex flex-col gap-gutter-xs"><span class="font-label text-label-md text-light-on-surface dark:text-dark-on-surface">Patient Identifier</span><input type="text" placeholder="e.g. Patient_03" class="rounded-md border border-light-outline-variant dark:border-dark-outline-variant bg-light-surface-container-low dark:bg-dark-surface-container text-body-md text-light-on-surface dark:text-dark-on-surface"></label>',
+          'Create case'
+        );
+      }
+      document.getElementById('top-create-case-btn').addEventListener('click', triggerCreateCase);
+      document.getElementById('qa-create-case').addEventListener('click', triggerCreateCase);
+
+      document.getElementById('qa-upload-images').addEventListener('click', function () {
+        openModal(
+          'Upload angiogram images',
+          '<p>Select a registered case to attach PNG or DICOM angiogram frames for segmentation.</p>' +
+          '<select class="rounded-md border border-light-outline-variant dark:border-dark-outline-variant bg-light-surface-container-low dark:bg-dark-surface-container text-body-md text-light-on-surface dark:text-dark-on-surface"><option>pt2case_01 (Patient_02)</option><option>Case_01 (Patient_01)</option><option>TEST-CASE-001 (TEST-PATIENT-001)</option></select>',
+          'Select files'
+        );
+      });
+
+      document.getElementById('qa-start-analysis').addEventListener('click', function () {
+        openModal(
+          'Start artery segmentation analysis',
+          '<p>Queue an uploaded angiogram frame for coronary artery segmentation and stenosis detection.</p>' +
+          '<select class="rounded-md border border-light-outline-variant dark:border-dark-outline-variant bg-light-surface-container-low dark:bg-dark-surface-container text-body-md text-light-on-surface dark:text-dark-on-surface"><option>pt2case_01 · 33.png</option><option>pt2case_01 · 30.png</option><option>Case_01 · Image ad1f145e</option></select>',
+          'Run analysis'
+        );
+      });
+
+      document.getElementById('qa-view-reports').addEventListener('click', function () {
+        showToast('Reports workspace: 3 completed case summaries available');
+      });
+
+      // Toast helper
+      const toast = document.getElementById('toast');
+      const toastMessage = document.getElementById('toast-message');
+      let toastTimer;
+      function showToast(msg) {
+        toastMessage.textContent = msg;
+        toast.classList.remove('hidden');
+        toast.classList.add('flex');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () {
+          toast.classList.add('hidden');
+          toast.classList.remove('flex');
+        }, 2600);
+      }
+
+      document.querySelectorAll('.nav-toast-link').forEach(function (el) {
+        el.addEventListener('click', function (e) {
+          e.preventDefault();
+          const label = el.textContent.trim();
+          showToast('Opened ' + label + ' view');
+        });
+      });
+
+      document.getElementById('notif-btn').addEventListener('click', function () {
+        showToast('Latest update: Analysis completed for pt2case_01 (Image 43fb4985)');
+      });
+
+      document.getElementById('signout-btn').addEventListener('click', function () {
+        showToast('Session active for admin@example.com');
+      });
+    })();
+  </script>
+
+
+</body></html>

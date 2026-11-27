@@ -22,5 +22,6 @@ class PatientRead(BaseModel):
 
     id: UUID
     owner_id: UUID
+    owner_name: str | None = None
     patient_ref: str
     created_at: datetime

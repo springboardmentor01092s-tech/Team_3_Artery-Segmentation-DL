@@ -1,0 +1,9 @@
+image_id,centerline_pixels_near_stenosis,min_width_px,median_width_px,max_width_px,status
+1,184,2.0,12.41,18.0,Exploratory estimate
+10,143,6.0,10.0,14.14,Exploratory estimate
+100,111,4.0,10.2,14.0,Exploratory estimate
+1000,151,2.0,10.0,12.0,Exploratory estimate
+101,346,2.0,8.49,19.7,Exploratory estimate
+102,143,4.0,12.0,14.14,Exploratory estimate
+103,137,6.0,10.0,14.14,Exploratory estimate
+104,91,6.0,10.0,12.81,Exploratory estimate

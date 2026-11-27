@@ -93,4 +93,9 @@ def get_image_content(
         raise HTTPException(status_code=404, detail="Image file not found") from exc
     if not path.is_file():
         raise HTTPException(status_code=404, detail="Image file not found")
-    return FileResponse(path, media_type=image.media_type, filename=image.original_filename)
+    return FileResponse(
+        path,
+        media_type=image.media_type,
+        filename=image.original_filename,
+        headers={"Cache-Control": "private, no-store"},
+    )

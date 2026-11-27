@@ -1,8 +1,6 @@
 from collections.abc import Generator
-from uuid import UUID
-
 import jwt
-from fastapi import Depends, HTTPException, status
+from fastapi import Depends, HTTPException, Request, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from sqlalchemy.orm import Session
 
@@ -13,7 +11,8 @@ from app.models.user import User
 bearer = HTTPBearer(auto_error=False)
 
 
-def get_current_user(
+def get_authenticated_user(
+    request: Request,
     credentials: HTTPAuthorizationCredentials | None = Depends(bearer),
     db: Session = Depends(get_db),
 ) -> User:
@@ -25,13 +24,26 @@ def get_current_user(
     if credentials is None:
         raise unauthorized
     try:
-        user_id: UUID = decode_access_token(credentials.credentials)
+        user_id, token_version = decode_access_token(credentials.credentials)
     except (jwt.InvalidTokenError, ValueError, RuntimeError):
         raise unauthorized from None
     user = db.get(User, user_id)
-    if user is None or not user.is_active:
+    if user is None or not user.is_active or user.token_version != token_version:
         raise unauthorized
+    request.state.auth_token_version = token_version
     return user
+
+
+def get_current_user(current_user: User = Depends(get_authenticated_user)) -> User:
+    if current_user.must_change_password:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail={
+                "code": "password_change_required",
+                "message": "Change the temporary password before accessing this resource.",
+            },
+        )
+    return current_user
 
 
 def require_admin(current_user: User = Depends(get_current_user)) -> User:

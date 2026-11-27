@@ -16,13 +16,21 @@ router = APIRouter(prefix="/cases", tags=["cases"])
 
 
 @router.get("", response_model=list[CaseRead])
-def list_cases(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)) -> list[Case]:
-    query = owned_or_admin(select(Case), Case, current_user).order_by(Case.created_at.desc())
-    return list(db.scalars(query).all())
+def list_cases(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)) -> list[CaseRead]:
+    query = (
+        owned_or_admin(select(Case, User.full_name).join(User, User.id == Case.owner_id), Case, current_user)
+        .order_by(Case.created_at.desc())
+    )
+    return [CaseRead.model_validate(case).model_copy(update={"owner_name": owner_name}) for case, owner_name in db.execute(query)]
+
+
+def case_read(db: Session, case: Case) -> CaseRead:
+    owner_name = db.scalar(select(User.full_name).where(User.id == case.owner_id))
+    return CaseRead.model_validate(case).model_copy(update={"owner_name": owner_name})
 
 
 @router.post("", response_model=CaseRead, status_code=status.HTTP_201_CREATED)
-def create_case(payload: CaseCreate, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)) -> Case:
+def create_case(payload: CaseCreate, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)) -> CaseRead:
     patient = db.scalar(owned_or_admin(select(Patient), Patient, current_user).where(Patient.id == payload.patient_id))
     if patient is None:
         raise HTTPException(status_code=404, detail="Patient not found")
@@ -39,19 +47,19 @@ def create_case(payload: CaseCreate, db: Session = Depends(get_db), current_user
         db.rollback()
         raise HTTPException(status_code=409, detail="Case reference already exists for this owner") from exc
     db.refresh(case)
-    return case
+    return case_read(db, case)
 
 
 @router.get("/{case_id}", response_model=CaseRead)
-def get_case(case_id: UUID, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)) -> Case:
+def get_case(case_id: UUID, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)) -> CaseRead:
     case = db.scalar(owned_or_admin(select(Case), Case, current_user).where(Case.id == case_id))
     if case is None:
         raise HTTPException(status_code=404, detail="Case not found")
-    return case
+    return case_read(db, case)
 
 
 @router.patch("/{case_id}", response_model=CaseRead)
-def update_case(case_id: UUID, payload: CaseUpdate, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)) -> Case:
+def update_case(case_id: UUID, payload: CaseUpdate, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)) -> CaseRead:
     case = db.scalar(owned_or_admin(select(Case), Case, current_user).where(Case.id == case_id))
     if case is None:
         raise HTTPException(status_code=404, detail="Case not found")
@@ -67,4 +75,4 @@ def update_case(case_id: UUID, payload: CaseUpdate, db: Session = Depends(get_db
         db.rollback()
         raise HTTPException(status_code=409, detail="Case reference already exists for this owner") from exc
     db.refresh(case)
-    return case
+    return case_read(db, case)

@@ -1,0 +1,9 @@
+image_id,measurement_centerline_pixels,branchpoints_near_stenosis,branch_contamination
+1,184,8,Review carefully
+10,143,4,Review carefully
+100,111,4,Review carefully
+1000,151,4,Review carefully
+101,346,5,Review carefully
+102,143,8,Review carefully
+103,137,7,Review carefully
+104,91,0,No branch point detected

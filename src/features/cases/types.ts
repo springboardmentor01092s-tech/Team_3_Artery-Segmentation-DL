@@ -1,6 +1,7 @@
 export type CaseRecord = {
   id: string
   owner_id: string
+  owner_name: string | null
   patient_id: string
   case_ref: string
   modality: string | null
@@ -10,6 +11,7 @@ export type CaseRecord = {
 export type PatientRecord = {
   id: string
   owner_id: string
+  owner_name: string | null
   patient_ref: string
   created_at: string
 }

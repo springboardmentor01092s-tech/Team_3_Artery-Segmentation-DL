@@ -1,0 +1,47 @@
+﻿# Git metadata
+.git/
+
+# Frontend dependencies and build output
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Python environments and caches
+.venv/
+venv/
+**/.venv/
+**/venv/
+**/__pycache__/
+**/*.py[cod]
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+
+# Private environment files and secrets
+.env
+.env.*
+**/.env
+**/.env.*
+!.env.example
+!**/.env.example
+!**/.postgres.env.example
+
+# PostgreSQL private configuration
+backend/.postgres.env
+
+# Existing patient uploads and analysis outputs
+backend/storage/
+backend/uploads/
+storage/
+uploads/
+data/
+
+# Model weights and checkpoints (mounted at runtime)
+ml/checkpoints/
+*.pt
+*.pth
+*.ckpt
+
+# Local test and coverage output
+htmlcov/
+.coverage*

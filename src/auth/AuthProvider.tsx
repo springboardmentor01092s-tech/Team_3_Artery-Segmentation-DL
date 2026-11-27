@@ -3,9 +3,11 @@ import { apiRequest, clearAccessToken, getAccessToken, setAccessToken } from './
 
 export type AuthUser = {
   id: string
+  full_name: string | null
   email: string
   role: 'admin' | 'user'
   is_active: boolean
+  must_change_password: boolean
   created_at: string
 }
 
@@ -13,7 +15,8 @@ type LoginResponse = { access_token: string; token_type: string; expires_in: num
 type AuthContextValue = {
   user: AuthUser | null
   isLoading: boolean
-  login: (email: string, password: string) => Promise<void>
+  login: (email: string, password: string) => Promise<AuthUser>
+  updateUser: (updated: AuthUser) => void
   logout: () => void
 }
 
@@ -47,7 +50,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return () => window.removeEventListener('auth:unauthorized', handleUnauthorized)
   }, [])
 
-  const login = useCallback(async (email: string, password: string) => {
+  const login = useCallback(async (email: string, password: string): Promise<AuthUser> => {
     const result = await apiRequest<LoginResponse>('/auth/login', {
       method: 'POST',
       body: JSON.stringify({ email, password }),
@@ -57,6 +60,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       const authenticatedUser = await apiRequest<AuthUser>('/auth/me')
       setUser(authenticatedUser)
+      return authenticatedUser
     } catch (error) {
       clearAccessToken()
       setUser(null)
@@ -64,7 +68,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, [])
 
-  const value = useMemo(() => ({ user, isLoading, login, logout }), [user, isLoading, login, logout])
+  const updateUser = useCallback((updated: AuthUser) => setUser(updated), [])
+
+  const value = useMemo(() => ({ user, isLoading, login, updateUser, logout }), [user, isLoading, login, updateUser, logout])
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
 

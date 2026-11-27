@@ -3,6 +3,7 @@ import AppShell from './components/AppShell'
 import { AdminPreviewGate } from './auth/previewAccess'
 import ProtectedRoute from './auth/ProtectedRoute'
 import CasesPage from './pages/CasesPage'
+import AboutPage from './pages/AboutPage'
 import DashboardPage from './pages/DashboardPage'
 import LoginPage from './pages/LoginPage'
 import PatientsPage from './pages/PatientsPage'
@@ -11,11 +12,14 @@ import ResultsPage from './pages/ResultsPage'
 import SettingsPage from './pages/SettingsPage'
 import UploadAnalysisPage from './pages/UploadAnalysisPage'
 import UsersPage from './pages/UsersPage'
+import VerifyEmailChangePage from './pages/VerifyEmailChangePage'
 
 export default function App() {
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/about" element={<AboutPage />} />
+      <Route path="/verify-email-change" element={<VerifyEmailChangePage />} />
       <Route element={<ProtectedRoute><AppShell /></ProtectedRoute>}>
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/patients" element={<PatientsPage />} />

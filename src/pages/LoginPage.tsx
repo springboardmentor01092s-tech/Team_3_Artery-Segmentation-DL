@@ -1,17 +1,20 @@
 
 import { useState, type FormEvent } from 'react'
 import { ArrowRight, Eye, EyeOff, LockKeyhole, Mail, UsersRound } from 'lucide-react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import PublicHeader from '../components/PublicHeader'
 import Brand from '../components/Brand'
-import { ArteryIllustration } from '../components/DecorativeArt'
+import { CoronaryHeartArtwork } from '../components/DecorativeArt'
 import { useAuth } from '../auth/AuthProvider'
+import { readWorkspacePreferences } from '../preferences/workspace-preferences.mjs'
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false)
-  const [message, setMessage] = useState('')
+  const [searchParams] = useSearchParams()
+  const passwordChanged = searchParams.get('passwordChanged') === '1'
+  const [message, setMessage] = useState(passwordChanged ? 'Password updated. Sign in using your new password.' : '')
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
-  const location = useLocation()
   const { login } = useAuth()
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -24,9 +27,8 @@ export default function LoginPage() {
     const password = String(formData.get('password') ?? '')
 
     try {
-      await login(email, password)
-      const from = (location.state as { from?: { pathname?: string } } | null)?.from?.pathname
-      navigate(from && from !== '/login' ? from : '/dashboard', { replace: true })
+      const authenticatedUser = await login(email, password)
+      navigate(readWorkspacePreferences(authenticatedUser.id).defaultLandingPage, { replace: true })
     } catch (error) {
       if (error instanceof Error && 'status' in error && error.status === 401) {
         setMessage('Invalid email or password.')
@@ -42,29 +44,23 @@ export default function LoginPage() {
 
   return (
     <div className="login-page">
-      <header className="login-header">
-        <Link to="/login" className="login-header__brand"><Brand /></Link>
-        <nav aria-label="Public navigation">
-          <a href="#home">Home</a>
-          <a href="#about">About</a>
-          <a href="mailto:support@example.org">Contact</a>
-        </nav>
-      </header>
+      <section className="login-hero" aria-label="CoronAI medical imaging">
+        <Link to="/login" className="login-hero__brand" aria-label="CoronAI login"><Brand /></Link>
+        <div className="login-hero__copy">
+          <p className="login-hero__eyebrow">MEDICAL IMAGING <span>•</span> ARTIFICIAL INTELLIGENCE</p>
+          <h1>Advanced Artery<br /><span>Intelligence</span></h1>
+          <p className="login-hero__description">AI-powered artery segmentation and stenosis analysis for intelligent medical image review.</p>
+        </div>
+        <CoronaryHeartArtwork />
+      </section>
 
-      <main className="login-main" id="home">
-        <section className="login-intro" id="about">
-          <div className="eyebrow"><span className="eyebrow__dot" /> ARTERY IMAGING WORKSPACE</div>
-          <h1>Artery segmentation<br />and stenosis detection</h1>
-          <p className="login-intro__lead">
-            A focused workspace for organizing angiography images and reviewing analysis when a validated model is available.
-          </p>
-          <ArteryIllustration />
-          <div className="login-intro__caption">
-            <span className="caption-dot" /> Secure image workspace <span className="caption-divider">·</span> Research preview
-          </div>
-        </section>
+      <section className="login-stage">
+        <header className="login-header login-stage__header">
+          <PublicHeader showBrand={false} />
+        </header>
 
-        <section className="login-card" aria-labelledby="login-title">
+        <main className="login-main">
+          <section className="login-card" aria-labelledby="login-title">
           <div className="login-card__heading">
             <span className="login-card__icon"><LockKeyhole size={20} aria-hidden="true" /></span>
             <h2 id="login-title">Welcome back</h2>
@@ -129,20 +125,13 @@ export default function LoginPage() {
           >
             <UsersRound size={18} aria-hidden="true" /> Sign in with an institution
           </button>
-          <div className="login-preview">
-            <Link to="/dashboard">Preview the dashboard <ArrowRight size={14} aria-hidden="true" /></Link>
-            <span>Frontend layout only</span>
-          </div>
-          <p className="login-card__privacy">
-            <LockKeyhole size={13} aria-hidden="true" /> Secure access is available to administrator-created accounts.
-          </p>
-        </section>
-      </main>
+          </section>
+        </main>
 
-      <footer className="login-footer">
-        <span>© 2026 Artery Analysis System</span>
-        <div><a href="#privacy">Privacy</a><span /> <a href="#terms">Terms</a><span /> <a href="mailto:support@example.org">Help</a></div>
-      </footer>
+        <footer className="login-footer">
+          <span>CoronAI Medical Imaging Research Workspace</span>
+        </footer>
+      </section>
     </div>
   )
 }
